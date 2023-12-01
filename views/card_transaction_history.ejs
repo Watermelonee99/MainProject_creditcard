@@ -1,0 +1,61 @@
+<%-include('header.ejs')%>
+      <% if(user_id){ %>
+        <h1 class="display-4"><%=name%>님</h1>
+        <p class="lead">당신의 소비내역을 입력해 주세요.</p>
+        <div class="jumbotron">
+          <form action = "/transactionProc" method="post">
+              <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">소비내역</li>
+                  </ol>
+              </nav>
+              
+              <div class="form-group">
+                <label class="input-group-text" for="inputGroupSelect01">category</label>
+                <select class="custom-select" id="category" name = "category">
+                    <option selected>...</option>
+                    <option value="음식">음식</option>
+                    <option value="패션">패션</option>
+                    <option value="주유">주유</option>
+                </select>
+                <label for="thismonth">이번 달</label>
+                <input type="number" name = "thismonth" class="form-control" id="thismonth" min="0" max="999999999999" required>
+          
+                <label for="lastmonth">저번 달</label>
+                <input type="number" name = "lastmonth" class="form-control" id="lastmonth" min="0" max="999999999999" required>
+              </div>
+              
+  
+              <div class="form-group">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="gridCheck" required>
+                  <label class="form-check-label" for="gridCheck">
+                    개인정보 수집 동의
+                  </label>
+                </div>
+              </div>
+              <button type="submit" href="/transactionProc" class="btn btn-primary">제출</button>
+          </form> 
+  
+  
+          <p><h4>그래프</h4></p>
+          <div class='tableauPlaceholder' id='viz1701137667175' style='position: relative'><noscript><a href='#'><img alt='HR Dashboard ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;NS&#47;NS5WDJ4GJ&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='path' value='shared&#47;NS5WDJ4GJ' /> <param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;NS&#47;NS5WDJ4GJ&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='ko-KR' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1701137667175');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='1200px';vizElement.style.height='827px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='1200px';vizElement.style.height='827px';} else { vizElement.style.width='100%';vizElement.style.height='1777px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+          <hr class="my-4">
+          <p>카드 추천 받으러 가기!</p>
+          <a class="btn btn-primary btn-lg" href="/recommend" role="button">클릭!</a>
+        </div>
+
+
+
+
+
+
+
+
+      <%} else{ %>
+        <p class="lead">로그인이 필요합니다</p>
+        <a class="btn btn-primary btn-lg" href="/translogin" role="button">로그인!</a>
+      <%} %>
+      
+      
+<%-include('footer.ejs')%>
