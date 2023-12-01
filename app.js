@@ -306,3 +306,13 @@ app.get('/contactList', (req,res)=>{
         res.render('contactList.ejs',{lists:results})
     })
 })
+
+app.get('/transaction_mydata', (req,res)=>{
+
+    var sql = `select * from user order by idx desc`
+    connection.query(sql,function(err,results,fields){
+        if(err)throw err;
+        res.render('transaction_mydata.ejs',{user_data:results})
+        console.log(results)
+    })
+})

@@ -1,0 +1,19 @@
+<%-include('header.ejs')%>
+    
+        <p><h4>내 정보</h4></p>
+            <h1 class="display-4"><%=name%>님</h1>
+            <p class="lead">당신이 입력한 정보입니다.</p>
+            <% user_data.forEach(item => { %>
+
+                <tr>
+                <td><%=item.idx%></td>
+                <td><%=item.name%></td>
+                <td><%=item.uesr_id%></td>
+                <td><%=item.email%></td>
+                <td><%-item.age%></td>
+                </tr>
+        
+            <% }) %>
+    </form>
+
+<%-include('footer.ejs')%>
