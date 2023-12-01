@@ -78,6 +78,13 @@ app.get('/register', function(req, res){
 app.get('/translogin', function(req, res){
     res.render('translogin.ejs')
 });
+app.get('/transaction_graph', function(req, res){
+    res.render('transaction_graph.ejs')
+});
+app.get('/transaction_search', function(req, res){
+    res.render('transaction_search.ejs')
+});
+
 app.get('/recommendlogin', function(req, res){
     res.render('recommendlogin.ejs')
 });
