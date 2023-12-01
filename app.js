@@ -92,6 +92,14 @@ app.get('/gradelogin', function(req, res){
     res.render('gradelogin.ejs')
 });
 
+app.get('/loading', function(req, res){
+    res.render('loading.ejs')
+});
+app.get('/grade_result', function(req, res){
+    res.render('grade_result.ejs')
+});
+
+
 
 app.post('/contactProc', (req, res) => {
     const name = req.body.name;
