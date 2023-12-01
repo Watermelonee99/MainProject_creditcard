@@ -1,19 +1,30 @@
 <%-include('header.ejs')%>
     
         <p><h4>내 정보</h4></p>
-            <h1 class="display-4"><%=name%>님</h1>
-            <p class="lead">당신이 입력한 정보입니다.</p>
-            <% user_data.forEach(item => { %>
+            <% transaction.forEach(item => { %>
 
-                <tr>
-                <td><%=item.idx%></td>
-                <td><%=item.name%></td>
-                <td><%=item.uesr_id%></td>
-                <td><%=item.email%></td>
-                <td><%-item.age%></td>
-                </tr>
-        
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Idx</th>
+                            <th>Category</th>
+                            <th>Month</th>
+                            <th>Regdate</th>
+                        </tr>
+                        <tr>
+                            <td><%= item.idx %></td>
+                            <td><%= item.category %></td>
+                            <td><%= item.month %></td>
+                            <td><%= item.regdate %></td>
+                        </tr>
+                        <hr />
+                    </table>
+                </div>
+            
             <% }) %>
-    </form>
+
+            <hr />
+            <a class="btn btn-primary btn-lg" href="/transaction" role="button">돌아가기</a>
+    
 
 <%-include('footer.ejs')%>

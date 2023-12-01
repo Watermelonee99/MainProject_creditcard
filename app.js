@@ -281,12 +281,11 @@ app.post('/registerProc', (req, res) => {
 });
 
 app.post('/transactionProc', (req, res) => {
-    const thismonth = req.body.thismonth;
-    const lastmonth = req.body.lastmonth;
     const category = req.body.category;
+    const month = req.body.month;
 
-    var sql = `insert into transaction(category, thismonth, lastmonth, regdate)
-    values('${category}','${thismonth}','${lastmonth}',now() )`
+    var sql = `insert into transaction(category, month, regdate)
+    values('${category}','${month}',now() )`
     
     connection.query(sql, function(err, result){
         if(err) throw err;
@@ -317,10 +316,10 @@ app.get('/contactList', (req,res)=>{
 
 app.get('/transaction_mydata', (req,res)=>{
 
-    var sql = `select * from user order by idx desc`
+    var sql = `select * from transaction order by idx`
     connection.query(sql,function(err,results,fields){
         if(err)throw err;
-        res.render('transaction_mydata.ejs',{user_data:results})
+        res.render('transaction_mydata.ejs',{transaction:results})
         console.log(results)
     })
 })
