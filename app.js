@@ -56,16 +56,14 @@ app.get('/transaction', function (req, res) {
     res.render('card_transaction_history.ejs');
   });
 
-// 새로운 코드 추가
-const categories = [
+  const categories = [
     '모든가맹점', '교통', '주유', '마트/편의점', '쇼핑', '푸드', '배달', '카페/디저트',
     '뷰티/피트니스', '생활요금', '의료', '애완동물', '자동차/하이패스', '레져/스포츠', '영화/문화',
     '간편결제', '항공', '프리미엄', '여행/숙박', '해외', '디지털구독', '멤버십', '교육/육아', '금융', '기타'
   ];
-
-app.get('/recommend', (req, res) => {
-  res.render('recommend.ejs', { user_id: 'your_user_id', name: '사용자', categories });
-});
+// app.get('/recommend', (req, res) => {
+//   res.render('recommend.ejs', { user_id: 'your_user_id', name: '사용자', categories });
+// });
 
 app.get('/card-details', (req, res) => {
   const selectedCategory = req.query.category;
@@ -81,12 +79,14 @@ function getCardDetails(category) {
 
 
 
-app.get('/transaction', function(req, res){
+app.get('/transaction', (req, res) => {
     res.render('card_transaction_history.ejs')
 });
 
+
+
 app.get('/recommend', function(req, res){
-    res.render('recommend.ejs')
+    res.render('recommend.ejs', { categories });
 });
 
 app.get('/grade', function(req, res){
