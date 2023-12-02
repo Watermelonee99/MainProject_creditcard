@@ -48,9 +48,38 @@ app.get('/', function(req, res){
 });
 
 
-app.get('/', function(req, res){
-    res.render('index.ejs')
+// app.get('/', function(req, res){
+//     res.render('index.ejs')
+// });
+
+app.get('/transaction', function (req, res) {
+    res.render('card_transaction_history.ejs');
+  });
+
+// 새로운 코드 추가
+const categories = [
+    '모든가맹점', '교통', '주유', '마트/편의점', '쇼핑', '푸드', '배달', '카페/디저트',
+    '뷰티/피트니스', '생활요금', '의료', '애완동물', '자동차/하이패스', '레져/스포츠', '영화/문화',
+    '간편결제', '항공', '프리미엄', '여행/숙박', '해외', '디지털구독', '멤버십', '교육/육아', '금융', '기타'
+  ];
+
+app.get('/recommend', (req, res) => {
+  res.render('recommend.ejs', { user_id: 'your_user_id', name: '사용자', categories });
 });
+
+app.get('/card-details', (req, res) => {
+  const selectedCategory = req.query.category;
+  const cardDetails = getCardDetails(selectedCategory);
+  res.render('card-details.ejs', { selectedCategory, cardDetails });
+});
+
+function getCardDetails(category) {
+  // 선택한 카테고리에 기반하여 카드 세부 정보를 가져오는 로직으로 대체
+  return { category, cardNumber: '1234 5678 9012 3456', expiryDate: '12/24', /* ... */ };
+}
+
+
+
 
 app.get('/transaction', function(req, res){
     res.render('card_transaction_history.ejs')
@@ -323,3 +352,4 @@ app.get('/transaction_mydata', (req,res)=>{
         console.log(results)
     })
 })
+
