@@ -28,7 +28,7 @@ app.set('views', './views')
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(express.static(__dirname+'/public'))
 app.use(session({secret:'credit', cookie:{
-    maxAge:60000}, resave:true, saveUninitialized:true
+    maxAge:3600000}, resave:true, saveUninitialized:true
 }))
 
 app.use((req,res,next)=>{
@@ -48,9 +48,38 @@ app.get('/', function(req, res){
 });
 
 
-app.get('/', function(req, res){
-    res.render('index.ejs')
+// app.get('/', function(req, res){
+//     res.render('index.ejs')
+// });
+
+app.get('/transaction', function (req, res) {
+    res.render('card_transaction_history.ejs');
+  });
+
+// 새로운 코드 추가
+const categories = [
+    '모든가맹점', '교통', '주유', '마트/편의점', '쇼핑', '푸드', '배달', '카페/디저트',
+    '뷰티/피트니스', '생활요금', '의료', '애완동물', '자동차/하이패스', '레져/스포츠', '영화/문화',
+    '간편결제', '항공', '프리미엄', '여행/숙박', '해외', '디지털구독', '멤버십', '교육/육아', '금융', '기타'
+  ];
+
+app.get('/recommend', (req, res) => {
+  res.render('recommend.ejs', { user_id: 'your_user_id', name: '사용자', categories });
 });
+
+app.get('/card-details', (req, res) => {
+  const selectedCategory = req.query.category;
+  const cardDetails = getCardDetails(selectedCategory);
+  res.render('card-details.ejs', { selectedCategory, cardDetails });
+});
+
+function getCardDetails(category) {
+  // 선택한 카테고리에 기반하여 카드 세부 정보를 가져오는 로직으로 대체
+  return { category, cardNumber: '1234 5678 9012 3456', expiryDate: '12/24', /* ... */ };
+}
+
+
+
 
 app.get('/transaction', function(req, res){
     res.render('card_transaction_history.ejs')
@@ -78,8 +107,18 @@ app.get('/register', function(req, res){
 app.get('/translogin', function(req, res){
     res.render('translogin.ejs')
 });
+app.get('/transaction_graph', function(req, res){
+    res.render('transaction_graph.ejs')
+});
+app.get('/transaction_search', function(req, res){
+    res.render('transaction_search.ejs')
+});
+
 app.get('/recommendlogin', function(req, res){
     res.render('recommendlogin.ejs')
+});
+app.get('/gradelogin', function(req, res){
+    res.render('gradelogin.ejs')
 });
 
 
@@ -189,6 +228,35 @@ app.post('/recommendloginProc', (req, res) => {
 
 });
 
+app.post('/gradeloginProc', (req, res) => {
+    // const name = req.body.name;
+    // const user_id = req.body.user_id;
+    const email = req.body.email;
+    const pw = req.body.pw;
+    // const age = req.body.age;
+
+    var sql = `select * from user where email=? and pw=?`
+    
+    var values = [email,pw];
+
+    connection.query(sql, values, function(err, result){
+        if(err) throw err;
+
+        if(result.length==0){
+            res.send("<script> alert('존재하지 않는 이메일이거나 비밀번호가 틀렸습니다.'); location.href='/login'</script>");
+        } else{
+            console.log(result[0]);
+
+            req.session.member = result[0]
+
+            res.send("<script> alert('로그인 되었습니다.'); location.href='/grade'</script>");
+            //res.send(result);
+        }
+    })
+
+
+});
+
 
 app.get('/logout', (req, res) => {
     
@@ -267,3 +335,7 @@ app.get('/contactList', (req,res)=>{
         res.render('contactList.ejs',{lists:results})
     })
 })
+
+// app.listen(8080, () => {
+//     console.log(`서버가 http://localhost:8080에서 실행 중입니다`);
+//   });

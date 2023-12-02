@@ -23,19 +23,13 @@
                 <a class="nav-link active" aria-current="page" href="/">홈  |</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/transaction">소비내역확인하기  |</a>
+                <a class="nav-link" href="/transaction">  소비내역확인하기  |</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/recommend">카드추천받기  |</a>
+                <a class="nav-link" href="/recommend">  카드조회  |</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/grade">나의 신용등급 |</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/contact">문의하기  |</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/contactList">문의내용  |</a>
+                <a class="nav-link" href="/grade">  나의 신용등급 |</a>
               </li>
               
               <% if(user_id){ %>
@@ -43,14 +37,14 @@
                   <a class="nav-link" href="/login"><%=name%>님  |</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/logout">로그아웃</a>
+                  <a class="nav-link" href="/logout"> 로그아웃</a>
                 </li>
               <%} else{ %>
                 <li class="nav-item">
-                  <a class="nav-link" href="/login">로그인  |</a>
+                  <a class="nav-link" href="/login">  로그인  |</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/register">회원가입  |</a>
+                  <a class="nav-link" href="/register"> 회원가입  |</a>
                 </li>
               <%} %>
 

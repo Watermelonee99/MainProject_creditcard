@@ -1,11 +1,45 @@
 <%-include('header.ejs')%>
 
-      <div class="jumbotron">
-        <h1 class="display-4">이재영님!</h1>
-        <p class="lead">당신의 신용등급을 확인해보세요!</p>
-        <hr class="my-4">
-        <p>소비내역 확인하러가기</p>
-        <a class="btn btn-primary btn-lg" href="/transaction" role="button">클릭!</a>
-      </div>
+<% if(user_id){ %>
+  <h1 class="display-4"><%=name%>님</h1>
+  <p class="lead">당신의 신용등급</p>
+  <button type="button" class="btn btn-outline-info">Info</button>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<%} else{ %>
+  <p class="lead">로그인이 필요합니다</p>
+  <a class="btn btn-primary btn-lg" href="/gradelogin" role="button">로그인!</a>
+<%} %>
       
 <%-include('footer.ejs')%>
