@@ -1,8 +1,7 @@
 <!-- 클라이언트 측 코드 -->
 <%- include('header.ejs') %>
 
-<% if (user_id) { %>
-    <h1 class="display-4"><%= name %>님</h1>
+
     <p class="lead">선택하세요</p>
 
     <!-- Add buttons for each category -->
@@ -70,17 +69,6 @@
         });
       });
     </script>
-
-
-
-
-
-
-
-<% } else { %>
-  <p class="lead">로그인이 필요합니다</p>
-  <a class="btn btn-primary btn-lg" href="/recommendlogin" role="button">로그인!</a>
-<% } %>
 
 <%- include('footer.ejs') %>
 

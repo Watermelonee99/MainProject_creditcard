@@ -40,6 +40,7 @@ app.use((req,res,next)=>{
         res.locals.name = req.session.member.name
     }
     next()
+    
 })
 
 app.get('/', function(req, res){
