@@ -14,16 +14,35 @@
                 <label class="input-group-text" for="inputGroupSelect01">category</label>
                 <select class="custom-select" id="category" name = "category">
                     <option selected>...</option>
-                    <option value="음식">음식</option>
-                    <option value="패션">패션</option> 
+                    <option value="교통">교통</option>
                     <option value="주유">주유</option>
+                    <option value="마트/편의점">마트/편의점</option>
+                    <option value="쇼핑">쇼핑</option>
+                    <option value="푸드">푸드</option>
+                    <option value="배달">배달</option>
+                    <option value="카페/디저트">카페/디저트</option>
+                    <option value="뷰티/피트니스">뷰티/피트니스</option>
+                    <option value="생활요금">생활요금</option>
+                    <option value="의료">의료</option>
+                    <option value="애완동물">애완동물</option>
+                    <option value="자동차/하이패스">자동차/하이패스</option>
+                    <option value="레져/스포츠">레져/스포츠</option>
+                    <option value="영화/문화">영화/문화</option>
+                    <option value="간편결제">간편결제</option>
+                    <option value="항공">항공</option>
+                    <option value="여행/숙박">여행/숙박</option>
+                    <option value="해외">해외</option>
+                    <option value="기타">기타</option>
                 </select>
-                <label for="thismonth">이번 달</label>
-                <input type="number" name = "thismonth" class="form-control" id="thismonth" min="0" max="999999999999" required>
-          
-                <label for="lastmonth">저번 달</label>
-                <input type="number" name = "lastmonth" class="form-control" id="lastmonth" min="0" max="999999999999" required>
               </div>
+              <hr />
+              <div>
+                <label for="month">이번 달 소비금액</label>
+                <input type="number" name = "month" class="form-control" id="month" 
+                min="0" max="999999999999" placeholder="원" required>
+              </div>
+                
+              
               
   
               <div class="form-group">
@@ -35,6 +54,7 @@
                 </div>
               </div>
               <button type="submit" href="/transactionProc" class="btn btn-primary">제출</button>
+              <a class="btn btn-primary" href="/transaction_mydata" role="button">내 정보</a>
           </form> 
           <hr />
         </div>

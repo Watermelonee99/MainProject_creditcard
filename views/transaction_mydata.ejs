@@ -1,0 +1,30 @@
+<%-include('header.ejs')%>
+    
+        <p><h4>내 정보</h4></p>
+            <% transaction.forEach(item => { %>
+
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Idx</th>
+                            <th>Category</th>
+                            <th>Month</th>
+                            <th>Regdate</th>
+                        </tr>
+                        <tr>
+                            <td><%= item.idx %></td>
+                            <td><%= item.category %></td>
+                            <td><%= item.month %></td>
+                            <td><%= item.regdate %></td>
+                        </tr>
+                        <hr />
+                    </table>
+                </div>
+            
+            <% }) %>
+
+            <hr />
+            <a class="btn btn-primary btn-lg" href="/transaction" role="button">돌아가기</a>
+    
+
+<%-include('footer.ejs')%>
