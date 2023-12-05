@@ -136,6 +136,7 @@ app.get('/grade_result', function(req, res){
 
 
 
+
 app.post('/contactProc', (req, res) => {
     const name = req.body.name;
     const email = req.body.email;
@@ -212,6 +213,42 @@ app.post('/transloginProc', (req, res) => {
 
 
 });
+
+app.post('/recommendProc', (req, res) => {
+    const selectedCategories = req.body.selectedCategories;
+
+    // Ensure selectedCategories is defined and not empty
+    if (selectedCategories && selectedCategories.trim() !== "") {
+        // Split the string into an array of categories
+        const categoriesArray = selectedCategories.split(',');
+
+        // Escape and sanitize the selectedCategories to prevent SQL injection
+        const conditions = categoriesArray.map(category => `\`${category}\` = 1`).join(' AND ');
+        const sql = `SELECT * FROM card_info WHERE ${conditions}`;
+
+        connection.query(sql, function (err, result) {
+            if (err) throw err;
+
+            console.log(result);
+
+            // 'result' 데이터를 app.locals에 저장
+            app.locals.cardDetailResult = result;
+
+            res.send("<script> alert('선택되었습니다.'); location.href='/card-detail'</script>");
+        });
+    } else {
+        res.send("<script> alert('선택된 카테고리가 없습니다.'); location.href='/recommend'</script>");
+    }
+});
+
+app.get('/card-detail', function(req, res){
+    // app.locals에서 'cardDetailResult' 데이터를 가져옴
+    const result = app.locals.cardDetailResult;
+
+    // 'result' 데이터를 전달하여 'card-detail.ejs' 템플릿을 렌더링
+    res.render('card-detail.ejs', { result });
+});
+
 
 app.post('/recommendloginProc', (req, res) => {
     // const name = req.body.name;
