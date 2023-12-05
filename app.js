@@ -57,11 +57,6 @@ app.get('/transaction', function (req, res) {
     res.render('card_transaction_history.ejs');
   });
 
-  const categories = [
-    '모든가맹점', '교통', '주유', '마트/편의점', '쇼핑', '푸드', '배달', '카페/디저트',
-    '뷰티/피트니스', '생활요금', '의료', '애완동물', '자동차/하이패스', '레져/스포츠', '영화/문화',
-    '간편결제', '항공', '프리미엄', '여행/숙박', '해외', '디지털구독', '멤버십', '교육/육아', '금융', '기타'
-  ];
 // app.get('/recommend', (req, res) => {
 //   res.render('recommend.ejs', { user_id: 'your_user_id', name: '사용자', categories });
 // });
@@ -86,9 +81,19 @@ app.get('/transaction', (req, res) => {
 
 
 
-app.get('/recommend', function(req, res){
-    res.render('recommend.ejs', { categories });
+app.get('/recommend', function(req, res) {
+    var sql = `SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'card_info';`;
+    connection.query(sql, function(err, results, fields) {
+        if (err) throw err;
+
+        // 처음 3개의 컬럼을 제외한 나머지 컬럼만 추출
+        var categories = results.slice(3).map(row => row.COLUMN_NAME);
+
+        res.render('recommend.ejs', { categories });
+        console.log(categories);
+    });
 });
+
 
 app.get('/grade', function(req, res){
     res.render('grade.ejs')
@@ -353,4 +358,3 @@ app.get('/transaction_mydata', (req,res)=>{
         console.log(results)
     })
 })
-
