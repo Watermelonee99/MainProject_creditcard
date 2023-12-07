@@ -24,7 +24,6 @@ app.listen(8080, function(){
 app.set('vies engine', 'ejs')
 app.set('views', './views')
 
-
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(express.static(__dirname+'/public'))
 app.use(session({secret:'credit', cookie:{
