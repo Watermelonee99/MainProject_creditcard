@@ -81,17 +81,8 @@ app.get('/transaction', (req, res) => {
 
 
 
-app.get('/recommend', function(req, res) {
-    var sql = `SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'card_info';`;
-    connection.query(sql, function(err, results, fields) {
-        if (err) throw err;
-
-        // 처음 3개의 컬럼을 제외한 나머지 컬럼만 추출
-        var categories = results.slice(3).map(row => row.COLUMN_NAME);
-
-        res.render('recommend.ejs', { categories });
-        console.log(categories);
-    });
+app.get('/recommend', function(req, res){
+    res.render('recommend.ejs', { categories });
 });
 
 
@@ -133,6 +124,7 @@ app.get('/loading', function(req, res){
 app.get('/grade_result', function(req, res){
     res.render('grade_result.ejs')
 });
+
 
 
 
@@ -212,6 +204,42 @@ app.post('/transloginProc', (req, res) => {
 
 
 });
+
+app.post('/recommendProc', (req, res) => {
+    const selectedCategories = req.body.selectedCategories;
+
+    // Ensure selectedCategories is defined and not empty
+    if (selectedCategories && selectedCategories.trim() !== "") {
+        // Split the string into an array of categories
+        const categoriesArray = selectedCategories.split(',');
+
+        // Escape and sanitize the selectedCategories to prevent SQL injection
+        const conditions = categoriesArray.map(category => `\`${category}\` = 1`).join(' AND ');
+        const sql = `SELECT * FROM card_info WHERE ${conditions}`;
+
+        connection.query(sql, function (err, result) {
+            if (err) throw err;
+
+            console.log(result);
+
+            // 'result' 데이터를 app.locals에 저장
+            app.locals.cardDetailResult = result;
+
+            res.send("<script> alert('선택되었습니다.'); location.href='/card-detail'</script>");
+        });
+    } else {
+        res.send("<script> alert('선택된 카테고리가 없습니다.'); location.href='/recommend'</script>");
+    }
+});
+
+app.get('/card-detail', function(req, res){
+    // app.locals에서 'cardDetailResult' 데이터를 가져옴
+    const result = app.locals.cardDetailResult;
+
+    // 'result' 데이터를 전달하여 'card-detail.ejs' 템플릿을 렌더링
+    res.render('card-detail.ejs', { result });
+});
+
 
 app.post('/recommendloginProc', (req, res) => {
     // const name = req.body.name;
@@ -316,11 +344,34 @@ app.post('/registerProc', (req, res) => {
 });
 
 app.post('/transactionProc', (req, res) => {
-    const category = req.body.category;
-    const month = req.body.month;
+    const 교통 = req.body.교통;
+    const 주유 = req.body.주유;
+    const 마트 = req.body.마트;
+    const 쇼핑 = req.body.쇼핑;
+    const 푸드 = req.body.푸드;
+    const 배달 = req.body.배달;
+    const 카페 = req.body.카페;
+    const 뷰티 = req.body.뷰티;
+    const 생활요금 = req.body.생활요금;
+    const 의료 = req.body.의료;
+    const 애완동물 = req.body.애완동물;
+    const 자동차 = req.body.자동차;
+    const 스포츠 = req.body.스포츠;
+    const 영화 = req.body.영화;
+    const 항공 = req.body.항공;
+    const 여행 = req.body.여행;
+    const 해외 = req.body.해외;
+    const 디지털구독 = req.body.디지털구독;
+    const 교육 = req.body.교육;
+    const 기타 = req.body.기타;
 
-    var sql = `insert into transaction(category, month, regdate)
-    values('${category}','${month}',now() )`
+    
+
+    var sql = `insert into transaction(교통,주유,마트,쇼핑,푸드,배달,카페,뷰티,생활요금,의료,애완동물,자동차,스포츠,영화,항공,여행,해외,디지털구독,교육,기타) 
+    values('${교통 || 0}','${주유 || 0}','${마트 || 0}','${쇼핑 || 0}','${푸드 || 0}','${배달 || 0}','${카페 || 0}','${뷰티 || 0}',
+    '${생활요금 || 0}','${의료 || 0}','${애완동물 || 0}',
+    '${자동차 || 0}','${스포츠 || 0}','${영화 || 0}','${항공 || 0}',
+    '${여행 || 0}','${해외 || 0}','${디지털구독 || 0}','${교육 || 0}','${기타 || 0}' )`
     
     connection.query(sql, function(err, result){
         if(err) throw err;
