@@ -1,30 +1,139 @@
-<%-include('header.ejs')%>
-    
-        <p><h4>내 정보</h4></p>
-            <% transaction.forEach(item => { %>
+<%- include('header.ejs') %>
 
-                <div class="table-container">
-                    <table>
-                        <tr>
-                            <th>Idx</th>
-                            <th>Category</th>
-                            <th>Month</th>
-                            <th>Regdate</th>
-                        </tr>
-                        <tr>
-                            <td><%= item.idx %></td>
-                            <td><%= item.category %></td>
-                            <td><%= item.month %></td>
-                            <td><%= item.regdate %></td>
-                        </tr>
-                        <hr />
-                    </table>
-                </div>
-            
-            <% }) %>
+<div class="container mt-5">
+    <h4 class="mb-4">내 정보</h4>
 
-            <hr />
-            <a class="btn btn-primary btn-lg" href="/transaction" role="button">돌아가기</a>
-    
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>카테고리</th>
+                    <th>금액</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% 
+                let total = 0;
+                transaction.forEach(item => { 
+                    total += parseInt(item.교통 || 0)+
+                            parseInt(item.주유 || 0)+
+                            parseInt(item.마트 || 0)+
+                            parseInt(item.쇼핑 || 0)+
+                            parseInt(item.푸드 || 0)+
+                            parseInt(item.배달 || 0)+
+                            parseInt(item.카페 || 0)+
+                            parseInt(item.뷰티 || 0)+
+                            parseInt(item.생활요금 || 0)+
+                            parseInt(item.의료 || 0)+
+                            parseInt(item.애완동물 || 0)+
+                            parseInt(item.자동차 || 0)+
+                            parseInt(item.스포츠 || 0)+
+                            parseInt(item.영화 || 0)+
+                            parseInt(item.항공 || 0)+
+                            parseInt(item.여행 || 0)+
+                            parseInt(item.해외 || 0)+
+                            parseInt(item.디지털구독 || 0)+
+                            parseInt(item.교육 || 0)+
+                            parseInt(item.기타 || 0);
 
-<%-include('footer.ejs')%>
+                    %>
+                    <tr>
+                        <td>교통</td>
+                        <td><%= item.교통 %></td>
+                    </tr>
+                    <tr>
+                        <td>주유</td>
+                        <td><%= item.주유 %></td>
+                    </tr>
+                    <tr>
+                        <td>마트/편의점</td>
+                        <td><%= item.마트 %></td>
+                    </tr>
+                    <tr>
+                        <td>쇼핑</td>
+                        <td><%= item.쇼핑 %></td>
+                    </tr>
+                    <tr>
+                        <td>푸드</td>
+                        <td><%= item.푸드 %></td>
+                    </tr>
+                    <tr>
+                        <td>배달</td>
+                        <td><%= item.배달 %></td>
+                    </tr>
+                    <tr>
+                        <td>카페/디저트</td>
+                        <td><%= item.카페 %></td>
+                    </tr>
+                    <tr>
+                        <td>뷰티/피트니스</td>
+                        <td><%= item.뷰티 %></td>
+                    </tr>
+                    <tr>
+                        <td>생활요금</td>
+                        <td><%= item.생활요금 %></td>
+                    </tr>
+                    <tr>
+                        <td>의료</td>
+                        <td><%= item.의료 %></td>
+                    </tr>
+                    <tr>
+                        <td>애완동물</td>
+                        <td><%= item.애완동물 %></td>
+                    </tr>
+                    <tr>
+                        <td>자동차/하이패스</td>
+                        <td><%= item.자동차 %></td>
+                    </tr>
+                    <tr>
+                        <td>레저/스포츠</td>
+                        <td><%= item.스포츠 %></td>
+                    </tr>
+                    <tr>
+                        <td>영화/문화</td>
+                        <td><%= item.영화 %></td>
+                    </tr>
+                    <tr>
+                        <td>항공</td>
+                        <td><%= item.항공 %></td>
+                    </tr>
+                    <tr>
+                        <td>여행/숙박</td>
+                        <td><%= item.여행 %></td>
+                    </tr>
+                    <tr>
+                        <td>해외</td>
+                        <td><%= item.해외 %></td>
+                    </tr>
+                    <tr>
+                        <td>디지털구독</td>
+                        <td><%= item.디지털구독 %></td>
+                    </tr>
+                    <tr>
+                        <td>교육/육아</td>
+                        <td><%= item.교육 %></td>
+                    </tr>
+                    <tr>
+                        <td>기타</td>
+                        <td><%= item.기타 %></td>
+                    </tr>
+                    
+                    
+                <% });
+                 %>
+                    <!-- 총액 출력 -->
+                    <tr class="table-info">
+                        <td><strong>총액</strong></td>
+                        <td><strong><%= total %></strong></td>
+                    </tr>
+                 
+            </tbody>
+        </table>
+    </div>
+
+    <hr />
+
+    <a class="btn btn-primary btn-lg" href="/transaction" role="button">돌아가기</a>
+</div>
+<%- include('footer.ejs') %>
+

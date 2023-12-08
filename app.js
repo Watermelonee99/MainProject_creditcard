@@ -3,10 +3,14 @@ const ejs = require('ejs')
 const app = express();
 var bodyParser = require('body-parser')
 var session = require('express-session')
+const {spawn} = require('child_process')
+
+
 
 require('dotenv').config()
 
-const mysql = require('mysql2')
+const mysql = require('mysql2');
+const { write } = require('fs');
 const connection = mysql.createConnection({
     host : 'localhost',
     user : 'root',
@@ -35,9 +39,11 @@ app.use((req,res,next)=>{
 
     res.locals.user_id="";
     res.locals.name="";
+    res.locals.email="";
     if(req.session.member){
         res.locals.user_id = req.session.member.user_id
         res.locals.name = req.session.member.name
+        res.locals.email = req.session.member.email
     }
     next()
     
@@ -120,6 +126,7 @@ app.get('/transaction_search', function(req, res){
     res.render('transaction_search.ejs')
 });
 
+
 app.get('/recommendlogin', function(req, res){
     res.render('recommendlogin.ejs')
 });
@@ -137,24 +144,98 @@ app.get('/grade_result', function(req, res){
 
 
 
-app.post('/contactProc', (req, res) => {
-    const name = req.body.name;
-    const email = req.body.email;
-    const content = req.body.content;
+let globalTransactionData;
+let globalcardinfoData;
 
-    var sql = `insert into contact(name,email, content, regdate)
-    values(?,?,?,now() )`
-    
-    var values = [name,email, content];
+function fetchDataFromCardInfo() {
+    return new Promise((resolve, reject) => {
+        var sql2 = `SELECT 
+            상품명,
+            전월실적,
+            연회비,
+            교통,
+            주유,
+            마트,
+            쇼핑,
+            푸드,
+            배달,
+            카페,
+            뷰티,
+            생활요금,
+            의료,
+            애완동물,
+            자동차,
+            스포츠,
+            영화,
+            항공,
+            여행,
+            해외,
+            디지털구독,
+            교육,
+            기타
+         FROM card_info`;
+        connection.query(sql2, function(err, result2) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(result2);
+            }
+        });
+    });
+}
 
-    connection.query(sql, values, function(err, result){
-        if(err) throw err;
-        console.log('자료 1개를 삽입하였습니다.');
-        res.send("<script> alert('문의사항이 등록되었습니다.'); location.href='/'</script>");
-    })
+app.post('/transaction_searchProc', async (req, res) => {
+    const email = req.session.member.email;
 
+    try {
+        // 첫 번째 쿼리
+        var sql1 = `SELECT * FROM transaction WHERE email = '${email}' ORDER BY idx DESC LIMIT 1`;
+        const result1 = await new Promise((resolve, reject) => {
+            connection.query(sql1, function(err, result) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(result);
+                }
+            });
+        });
+        globalTransactionData = result1;
 
+        // 두 번째 쿼리
+        globalcardinfoData = await fetchDataFromCardInfo();
+
+        // 렌더링
+        res.render('transaction_search.ejs', { transaction: globalcardinfoData });
+
+        // 로그 출력
+        
+        //console.log(globalcardinfoData);
+        //console.log(string);
+        const python = spawn('python',['./python/param_json.py']);
+        const string = JSON.stringify(globalTransactionData);
+        python.stdin.write(string);
+        python.stdin.end();
+
+        python.stdout.on('data', (data) =>{
+            console.log('stdout:' + data);
+        });
+        
+
+    } catch (error) {
+        console.error(error);
+        // 오류 처리
+    }
+    // 주의: 위 코드는 파이썬 프로세스의 종료를 기다리지 않고 바로 렌더링을 수행합니다. 
+    // 만약 파이썬 프로세스의 실행이 끝날 때까지 기다려야 한다면 spawnSync 함수를 사용할 수 있습니다.
 });
+
+
+
+
+
+
+
+
 
 app.post('/loginProc', (req, res) => {
     // const name = req.body.name;
@@ -353,6 +434,7 @@ app.post('/registerProc', (req, res) => {
 });
 
 app.post('/transactionProc', (req, res) => {
+    const email = req.session.member.email
     const 교통 = req.body.교통;
     const 주유 = req.body.주유;
     const 마트 = req.body.마트;
@@ -376,8 +458,8 @@ app.post('/transactionProc', (req, res) => {
 
     
 
-    var sql = `insert into transaction(교통,주유,마트,쇼핑,푸드,배달,카페,뷰티,생활요금,의료,애완동물,자동차,스포츠,영화,항공,여행,해외,디지털구독,교육,기타) 
-    values('${교통 || 0}','${주유 || 0}','${마트 || 0}','${쇼핑 || 0}','${푸드 || 0}','${배달 || 0}','${카페 || 0}','${뷰티 || 0}',
+    var sql = `insert into transaction(email,교통,주유,마트,쇼핑,푸드,배달,카페,뷰티,생활요금,의료,애완동물,자동차,스포츠,영화,항공,여행,해외,디지털구독,교육,기타) 
+    values('${email}','${교통 || 0}','${주유 || 0}','${마트 || 0}','${쇼핑 || 0}','${푸드 || 0}','${배달 || 0}','${카페 || 0}','${뷰티 || 0}',
     '${생활요금 || 0}','${의료 || 0}','${애완동물 || 0}',
     '${자동차 || 0}','${스포츠 || 0}','${영화 || 0}','${항공 || 0}',
     '${여행 || 0}','${해외 || 0}','${디지털구독 || 0}','${교육 || 0}','${기타 || 0}' )`
@@ -391,31 +473,19 @@ app.post('/transactionProc', (req, res) => {
 
 });
 
-app.get('/contactDelete', function(req, res){
-    var idx = req.query.idx
-    var sql = `delete from contact where idx='${idx}'`
-    connection.query(sql, function(err, result){
-        if(err) throw err;
-        res.send("<script> alert('삭제 되었습니다.'); location.href='/contactList'</script>");
-    })
-});
 
-app.get('/contactList', (req,res)=>{
 
-    var sql = `select * from contact order by idx desc`
-    connection.query(sql,function(err,results,fields){
-        if(err)throw err;
-        res.render('contactList.ejs',{lists:results})
-    })
-})
+
 
 app.get('/transaction_mydata', (req,res)=>{
-
-    var sql = `select * from transaction order by idx`
-    connection.query(sql,function(err,results,fields){
+    const email = req.session.member.email;
+    var sql = `SELECT * FROM transaction WHERE email = ? ORDER BY idx DESC LIMIT 1`;
+    var values = [email]
+    connection.query(sql,values,function(err,results,fields){
         if(err)throw err;
+        
         res.render('transaction_mydata.ejs',{transaction:results})
         console.log(results)
     })
-})
+});
 
