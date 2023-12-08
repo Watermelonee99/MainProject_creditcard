@@ -1,47 +1,177 @@
 <%-include('header.ejs')%>
 
-<% if(user_id){ %>
-  <h1 class="display-4"><%=name%>님</h1>
-  <p class="lead">당신의 신용등급</p>
-  <button type="button" class="btn btn-outline-info">Info</button>
-  <p class="lead">당신의 소비내역을 입력해 주세요.</p>
-        <div class="jumbotron">
-          <form action = "/transactionProc" method="post">
-              <nav aria-label="breadcrumb">
-                  <ol class="breadcrumb">
-                    <li class="breadcrumb-item active" aria-current="page">소비내역</li>
-                  </ol>
-              </nav>
-              
-              <div class="form-group">
-                <label class="input-group-text" for="inputGroupSelect01">category</label>
-                <select class="custom-select" id="category" name = "category">
-                    <option selected>...</option>
-                    <option value="음식">음식</option>
-                    <option value="패션">패션</option> 
-                    <option value="주유">주유</option>
-                </select>
-                <label for="thismonth">이번 달</label>
-                <input type="number" name = "thismonth" class="form-control" id="thismonth" min="0" max="999999999999" required>
-          
-                <label for="lastmonth">저번 달</label>
-                <input type="number" name = "lastmonth" class="form-control" id="lastmonth" min="0" max="999999999999" required>
-              </div>
-              
-  
-              <div class="form-group">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="gridCheck" required>
-                  <label class="form-check-label" for="gridCheck">
-                    개인정보 수집 동의
-                  </label>
+<% if(user_id){ %>  
+          <h1 class="display-4"><%=name%>님</h1>
+          <p class="lead">당신의 정보를 입력해 주세요.</p>
+          <div class="jumbotron">
+            <form action = "/gradeProc" method="post">
+                <div class="row">
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>성별</label><br>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" id="gender_M" name="gender" class="form-check-input" value="gender_M" checked>
+                            <label for="gender_M" class="form-check-label">남자</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" id="gender_F" name="gender" class="form-check-input" value="gender_F">
+                            <label for="gender_F" class="form-check-label">여자</label>
+                        </div>
+                    </div>
+                  </div>
+                
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>나이</label>
+                      <input type="number" name="age" class="form-control" min="0" max="999999999999" >
+                    </div>
+                  </div>
+                
+                  <div class="form-group">
+                    <label>차량 보유 여부</label><br>
+                      <div class="form-check form-check-inline">
+                          <input type="radio" id="car_O" name="car" class="form-check-input" value="car_O" checked>
+                          <label for="car_O" class="form-check-label">유</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                          <input type="radio" id="car_X" name="car" class="form-check-input" value="car_X">
+                          <label for="car_X" class="form-check-label">무</label>
+                      </div>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label>부동산 보유 여부</label><br>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" id="reality_O" name="reality" class="form-check-input" value="reality_O" checked>
+                        <label for="reality_O" class="form-check-label">유</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" id="reality_X" name="reality" class="form-check-input" value="reality_X">
+                        <label for="reality_X" class="form-check-label">무</label>
+                    </div>
                 </div>
               </div>
-              <button type="submit" href="/transactionProc" class="btn btn-primary">제출</button>
-          </form> 
-          <hr />
-        </div>
-        <a class="btn btn-primary btn-lg" href="/loading" role="button">조회</a>
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                        <label>결혼 여부</label><br>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" id="single" name="family_type" class="form-check-input" value="single" checked>
+                            <label for="single" class="form-check-label">기혼</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" id="married" name="family_type" class="form-check-input" value="married">
+                            <label for="married" class="form-check-label">미혼</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input type="radio" id="widow" name="family_type" class="form-check-input" value="widow">
+                          <label for="widow" class="form-check-label">이혼</label>
+                        </div>
+                      </div>
+                  </div> 
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>가족 수</label>
+                      <input type="number" name="family_size" class="form-control" min="0" max="999999999999" >
+                    </div>
+                  </div>
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>자녀 수</label>
+                      <input type="number" name="child_num" class="form-control" min="0" max="999999999999">
+                    </div>
+                  </div>
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                        <label>소득 유형</label><br>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" id="state_servant" name="income_type" class="form-check-input" value="state_servant" checked>
+                            <label for="state_servant" class="form-check-label">공무원</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" id="pensioner" name="income_type" class="form-check-input" value="pensioner">
+                            <label for="pensioner" class="form-check-label">연금</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input type="radio" id="working" name="income_type" class="form-check-input" value="working">
+                          <label for="working" class="form-check-label">근로자</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input type="radio" id="commercial_associate" name="income_type" class="form-check-input" value="commercial_associate">
+                          <label for="commercial_associate" class="form-check-label">자영업</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input type="radio" id="student" name="income_type" class="form-check-input" value="student">
+                          <label for="student" class="form-check-label">학생</label>
+                        </div>
+                      </div>
+                  </div>
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                        <label>직업</label><br>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" id="managers" name="occyp_type" class="form-check-input" value="state_servant" checked>
+                            <label for="state_servant" class="form-check-label">공무원</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" id="pensioner" name="occyp_type" class="form-check-input" value="pensioner">
+                            <label for="pensioner" class="form-check-label">연금</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input type="radio" id="working" name="occyp_type" class="form-check-input" value="working">
+                          <label for="working" class="form-check-label">근로자</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input type="radio" id="commercial_associate" name="occyp_type" class="form-check-input" value="commercial_associate">
+                          <label for="commercial_associate" class="form-check-label">자영업</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input type="radio" id="student" name="occyp_type" class="form-check-input" value="student">
+                          <label for="student" class="form-check-label">학생</label>
+                        </div>
+                      </div>
+                  </div>
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>근속 년 수</label>
+                      <input type="number" name="employed" class="form-control" min="0" max="999999999999" >
+                    </div>
+                  </div>
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>교육 수준</label>
+                      <input type="number" name="edu_type" class="form-control" min="0" max="999999999999" >
+                    </div>
+                  </div>
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>월 평균 소득</label>
+                      <input type="number" name="income_mean" class="form-control" min="0" max="999999999999">
+                    </div>
+                  </div>
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>신용카드 발급 이후 개월 수</label>
+                      <input type="number" name="begin_month" class="form-control" min="0" max="999999999999" >
+                    </div>
+                  </div>
+                </div>
+                
+                <button type="submit" href="/gradeProc" class="btn btn-primary">제출</button>
+                <a class="btn btn-primary" href="/grade_mydata" role="button">내 정보</a>
+            </form> 
+            <hr />
+          </div>
+          <a class="btn btn-primary btn-lg" href="/loading" role="button">조회</a>
 
 
 

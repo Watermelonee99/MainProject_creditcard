@@ -1,9 +1,13 @@
+
 const express = require('express');
 const ejs = require('ejs')
 const app = express();
 var bodyParser = require('body-parser')
 var session = require('express-session')
 const {spawn} = require('child_process')
+const { spawnSync } = require('child_process');
+const pythonProcess = spawnSync('python', ['./path/to/your/python/file.py']);
+const python_transaction = pythonProcess.stdout.toString();
 
 
 
@@ -204,9 +208,6 @@ app.post('/transaction_searchProc', async (req, res) => {
         // 두 번째 쿼리
         globalcardinfoData = await fetchDataFromCardInfo();
 
-        // 렌더링
-        res.render('transaction_search.ejs', { transaction: globalcardinfoData });
-
         // 로그 출력
         
         //console.log(globalcardinfoData);
@@ -216,8 +217,14 @@ app.post('/transaction_searchProc', async (req, res) => {
         python.stdin.write(string);
         python.stdin.end();
 
-        python.stdout.on('data', (data) =>{
-            console.log('stdout:' + data);
+        
+
+        python.stdout.on('data', (output) =>{
+            const outputString = output.toString();
+            console.log(typeof(outputString));
+
+            
+            res.render('transaction_search.ejs', { outputString });
         });
         
 
@@ -225,8 +232,6 @@ app.post('/transaction_searchProc', async (req, res) => {
         console.error(error);
         // 오류 처리
     }
-    // 주의: 위 코드는 파이썬 프로세스의 종료를 기다리지 않고 바로 렌더링을 수행합니다. 
-    // 만약 파이썬 프로세스의 실행이 끝날 때까지 기다려야 한다면 spawnSync 함수를 사용할 수 있습니다.
 });
 
 
@@ -489,3 +494,48 @@ app.get('/transaction_mydata', (req,res)=>{
     })
 });
 
+app.post('/gradeProc', (req, res) => {
+    const email = req.session.member.email
+    const gender = req.body.gender;
+    const age = req.body.age;
+    const car = req.body.car;
+    const reality = req.body.reality;
+    const family_type = req.body.family_type;
+    const family_size = req.body.family_size;
+    const child_num = req.body.child_num;
+    const income_type = req.body.income_type;
+    const occyp_type = req.body.occyp_type;
+    const employed = req.body.employed;
+    const edu_type = req.body.edu_type;
+    const income_mean = req.body.income_mean;
+    const begin_month = req.body.begin_month;
+
+    
+
+    var sql = `insert into user_grade(email,gender,age,car,reality,family_type,family_size,child_num,
+        income_type,occyp_type,employed,edu_type,income_mean,begin_month) 
+    values('${email}','${gender || 0}','${age || 0}','${car || 0}','${reality || 0}',
+    '${family_type || 0}','${family_size || 0}','${child_num || 0}',
+    '${income_type || 0}','${occyp_type || 0}','${employed || 0}',
+    '${edu_type || 0}','${income_mean || 0}','${begin_month || 0}' )`
+    
+    connection.query(sql, function(err, result){
+        if(err) throw err;
+        console.log('자료 1개를 삽입하였습니다.');
+        res.send("<script> alert('정보가 등록되었습니다.'); location.href='/grade'</script>");
+    })
+
+
+});
+
+app.get('/grade_mydata', (req,res)=>{
+    const email = req.session.member.email;
+    var sql = `SELECT * FROM user_grade WHERE email = ? ORDER BY idx DESC LIMIT 1`;
+    var values = [email]
+    connection.query(sql,values,function(err,results,fields){
+        if(err)throw err;
+        
+        res.render('grade_mydata.ejs',{grade:results})
+        console.log(results)
+    })
+});
