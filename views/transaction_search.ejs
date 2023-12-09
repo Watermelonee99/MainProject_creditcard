@@ -3,8 +3,14 @@
     <h1 class="display-4"><%=name%>님</h1>
     <p class="lead">당신에게 맞는 카드입니다</p>
     
-    
-    <%= outputString[0] %>
+    <% parsedData.forEach(category => { %>
+        <div class="col mb-3">
+          <button type="button" class="btn btn-outline-info category-btn rounded-3" data-category="<%= category %>">
+            <span class="fs-4"><%= category.Rank %></span>
+            <span class="fs-4"><%= category.CreditCard %></span>
+          </button>
+        </div>
+      <% }) %>
 
     <hr />
     <a class="btn btn-primary" href="/transaction" role="button">정보 다시 입력하기</a>

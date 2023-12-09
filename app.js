@@ -221,10 +221,11 @@ app.post('/transaction_searchProc', async (req, res) => {
 
         python.stdout.on('data', (output) =>{
             const outputString = output.toString();
-            console.log(typeof(outputString));
+            const parsedData = JSON.parse(outputString);
+            console.log(typeof(outputString),parsedData);
 
             
-            res.render('transaction_search.ejs', { outputString });
+            res.render('transaction_search.ejs', { parsedData });
         });
         
 
