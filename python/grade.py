@@ -27,19 +27,21 @@ sql_query = """
     SELECT gender, car, reality, child_num, income_type, edu_type, family_type, occyp_type,
            family_size, begin_month, Age, EMPLOYED, income_mean
     FROM user_grade
-    ORDER BY begin_month DESC
-    LIMIT 1
+    ORDER BY idx DESC
+    Limit 1
 """
 cursor.execute(sql_query)
 user_data = cursor.fetchall()
 
 columns = ['gender', 'car', 'reality', 'child_num', 'income_type', 'edu_type', 'family_type', 'occyp_type', 'family_size', 'begin_month', 'Age', 'EMPLOYED', 'income_mean']
 df_user_data = pd.DataFrame(user_data, columns=columns)
+print(df_user_data)
 
 model = joblib.load('C:/Users/Admin/Desktop/최종web/python/random_forest_model.joblib')
 
 predictions = model.predict(df_user_data)
 
+print(predictions)
 result = ''
 if predictions == 0:
     result = '하'

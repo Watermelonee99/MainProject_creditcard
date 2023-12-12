@@ -556,25 +556,26 @@ app.post('/gradeProc', (req, res) => {
     const occyp_type = req.body.occyp_type;
     const family_size = req.body.family_size;
     const begin_month = req.body.begin_month;
-    const age = req.body.age;
-    const employed = req.body.employed;
+    const Age = req.body.Age;
+    const EMPLOYED = req.body.EMPLOYED;
     const income_mean = req.body.income_mean;
     // console.log(email,gender,car,reality,
     //     child_num,income_type,edu_type,family_type,occyp_type,
     //     family_size,begin_month,age,employed,income_mean)
 
     var sql = `insert into user_grade(email,gender,car,reality,child_num,income_type,edu_type,family_type,
-        occyp_type,family_size,begin_month,age,employed,income_mean) 
+        occyp_type,family_size,begin_month,Age,EMPLOYED,income_mean) 
     values('${email}','${gender}','${car}','${reality}','${child_num || 0}',
     '${income_type}','${edu_type}','${family_type}',
     '${occyp_type}','${family_size || 0}','${begin_month || 0}',
-    '${age || 0}','${employed || 0}','${income_mean || 0}' )`
+    '${Age || 0}','${EMPLOYED || 0}','${income_mean || 0}' )`
     
     connection.query(sql, function(err, result){
         if(err) throw err;
         console.log('자료 1개를 삽입하였습니다.');
         res.send("<script> alert('정보가 등록되었습니다.'); location.href='/grade'</script>");
     })    
+    
 });
 
 // app.get('/grade_mydata', (req,res)=>{
