@@ -1,13 +1,8 @@
 import sys
 import mysql.connector
 import pandas as pd
-import numpy as np
-import json
 import joblib
-
-
-model = joblib.load('C:\Users\Admin\Desktop\최종web\python\random_forest_model.joblib')
-
+import numpy as np
 
 sys.stdout.reconfigure(encoding='utf-8')
 
@@ -28,10 +23,29 @@ cursor.execute('SET CHARACTER SET utf8;')
 cursor.execute('SET character_set_connection=utf8;')
 
 # 첫 번째 쿼리 실행
-sql_query = "SELECT * FROM card_info"
+sql_query = """
+    SELECT gender, car, reality, child_num, income_type, edu_type, family_type, occyp_type,
+           family_size, begin_month, Age, EMPLOYED, income_mean
+    FROM user_grade
+    ORDER BY begin_month DESC
+    LIMIT 1
+"""
 cursor.execute(sql_query)
-result_card_info = cursor.fetchall()
+user_data = cursor.fetchall()
 
-# 데이터프레임 생성
-df_card_info = pd.DataFrame(result_card_info)
-df_transaction = pd.DataFrame(result_transaction)
+columns = ['gender', 'car', 'reality', 'child_num', 'income_type', 'edu_type', 'family_type', 'occyp_type', 'family_size', 'begin_month', 'Age', 'EMPLOYED', 'income_mean']
+df_user_data = pd.DataFrame(user_data, columns=columns)
+
+model = joblib.load('C:/Users/Admin/Desktop/최종web/python/random_forest_model.joblib')
+
+predictions = model.predict(df_user_data)
+
+result = ''
+if predictions == 0:
+    result = '하'
+elif predictions == 1:
+    result = '중'
+elif predictions == 2:
+    result = '상'
+
+print(result)

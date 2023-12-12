@@ -274,88 +274,18 @@ app.post('/transaction_searchProc', async (req, res) => {
 
 
 
-// app.post('/grade_searchProc', async (req, res) => {
-//     const email = req.session.member.email;
-
-//     try {
-//         // 첫 번째 쿼리
-//         var sql1 = `SELECT * FROM transaction WHERE email = '${email}' ORDER BY idx DESC LIMIT 1`;
-//         const result1 = await new Promise((resolve, reject) => {
-//             connection.query(sql1, function(err, result) {
-//                 if (err) {
-//                     reject(err);
-//                 } else {
-//                     resolve(result);
-//                 }
-//             });
-//         });
-//         globalTransactionData = result1;
-
-//         // 두 번째 쿼리
-//         globalcardinfoData = await fetchDataFromCardInfo();
-
-//         // 로그 출력
-        
-//         //console.log(globalcardinfoData);
-//         //console.log(string);
-//         const python = spawn('python',['./python/transaction.py']);
-//         const string = JSON.stringify(globalTransactionData);
-//         python.stdin.write(string);
-//         python.stdin.end();
-
-
-
-
-//         python.stdout.on('data', (output) => {
-//             const outputString = output.toString();
-//             const parsedData = JSON.parse(outputString);
-        
-//             // Create a function to fetch card information for a category
-//             function fetchCardInfo(category) {
-//                 return new Promise((resolve, reject) => {
-//                     const sql_img1 = `SELECT 링크,이미지 FROM card_info WHERE 상품명 = '${category.CreditCard}' `;
-//                     connection.query(sql_img1, function(err, result) {
-//                         if (err) {
-//                             reject(err);
-//                         } else {
-//                             // Create a new object with the desired structure
-//                             const combinedInfo = {
-//                                 Rank: category.Rank,
-//                                 CreditCard: category.CreditCard,
-//                                 Score: category.Score,
-//                                 link: result[0].링크,
-//                                 img: result[0].이미지
-//                             };
-//                             resolve(combinedInfo);
-//                         }
-//                     });
-//                 });
-//             }
-        
-//             // 각 카테고리에 대한 카드 정보를 비동기적으로 조회
-//             const card_img_promises = parsedData.map(category => {
-//                 console.log(category.CreditCard);
-//                 return fetchCardInfo(category);
-//             });
-        
-//             // 모든 Promise가 완료될 때까지 기다린 후 결과를 렌더링
-//             Promise.all(card_img_promises)
-//                 .then(combinedInfoArray => {
-//                     console.log(combinedInfoArray);
-//                     res.render('transaction_search.ejs', { combinedInfoArray });
-//                 })
-//                 .catch(error => {
-//                     console.error(error);
-//                     res.render('error.ejs'); // 에러 발생 시 에러 페이지 렌더링
-//                 });
-//         });
+app.post('/gradeSearchProc', async (req, res) => {
+        const python = spawn('python',['./python/grade.py']);
         
 
-//     } catch (error) {
-//         console.error(error);
-//         // 오류 처리
-//     }
-// });
+        python.stdout.on('data', (output) => {
+            const outputString = output.toString().trim();
+            console.log(outputString);
+            res.render('grade_result.ejs', { outputString });
+        });
+        
+        
+});
 
 
 
