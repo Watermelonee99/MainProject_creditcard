@@ -48,19 +48,26 @@
 
       let selectedCategories = [];
 
-      // Add event listeners to category buttons
+      // 카테고리 버튼에 이벤트 리스너 추가
       categoryButtons.forEach((button) => {
         button.addEventListener("click", function () {
-          // Toggle active class on button click
+          // 버튼 클릭 시 "active" 클래스 토글
           button.classList.toggle("active");
 
-          // Update the selected categories array
+          // 선택된 카테고리 배열 업데이트
           const category = button.dataset.category;
           if (selectedCategories.includes(category)) {
             selectedCategories = selectedCategories.filter(c => c !== category);
           } else {
-            selectedCategories.push(category);
+            // 최대 3개의 카테고리 선택 가능 여부 확인
+            if (selectedCategories.length < 3) {
+              selectedCategories.push(category);
+          }   else {
+              // 3개 이상의 카테고리가 선택되면 추가적인 선택을 막음
+              alert("최대 3개의 카테고리만 선택할 수 있습니다.");
+              button.classList.remove("active"); // "active" 클래스 제거
           }
+        }
         });
       });
 

@@ -92,7 +92,7 @@ app.get('/transaction', (req, res) => {
 
 
 app.get('/recommend', function(req, res) {
-    var sql = `SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'card_info';`;
+    var sql = `SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'card_info' ORDER BY ORDINAL_POSITION LIMIT 28 OFFSET 1;`;
     connection.query(sql, function(err, results, fields) {
         if (err) throw err;
 
@@ -429,7 +429,7 @@ app.post('/recommendProc', (req, res) => {
         const categoriesArray = selectedCategories.split(',');
 
         // Escape and sanitize the selectedCategories to prevent SQL injection
-        const conditions = categoriesArray.map(category => `\`${category}\` = 1`).join(' AND ');
+        const conditions = categoriesArray.map(category => `\`${category}\` = 1`).join(' OR ');
         const sql = `SELECT * FROM card_info WHERE ${conditions}`;
 
         connection.query(sql, function (err, result) {
@@ -617,45 +617,44 @@ app.get('/transaction_mydata', (req,res)=>{
 app.post('/gradeProc', (req, res) => {
     const email = req.session.member.email
     const gender = req.body.gender;
-    const age = req.body.age;
     const car = req.body.car;
     const reality = req.body.reality;
-    const family_type = req.body.family_type;
-    const family_size = req.body.family_size;
     const child_num = req.body.child_num;
     const income_type = req.body.income_type;
-    const occyp_type = req.body.occyp_type;
-    const employed = req.body.employed;
     const edu_type = req.body.edu_type;
-    const income_mean = req.body.income_mean;
+    const family_type = req.body.family_type;
+    const occyp_type = req.body.occyp_type;
+    const family_size = req.body.family_size;
     const begin_month = req.body.begin_month;
+    const age = req.body.age;
+    const employed = req.body.employed;
+    const income_mean = req.body.income_mean;
+    // console.log(email,gender,car,reality,
+    //     child_num,income_type,edu_type,family_type,occyp_type,
+    //     family_size,begin_month,age,employed,income_mean)
 
-    
-
-    var sql = `insert into user_grade(email,gender,age,car,reality,family_type,family_size,child_num,
-        income_type,occyp_type,employed,edu_type,income_mean,begin_month) 
-    values('${email}','${gender || 0}','${age || 0}','${car || 0}','${reality || 0}',
-    '${family_type || 0}','${family_size || 0}','${child_num || 0}',
-    '${income_type || 0}','${occyp_type || 0}','${employed || 0}',
-    '${edu_type || 0}','${income_mean || 0}','${begin_month || 0}' )`
+    var sql = `insert into user_grade(email,gender,car,reality,child_num,income_type,edu_type,family_type,
+        occyp_type,family_size,begin_month,age,employed,income_mean) 
+    values('${email}','${gender}','${car}','${reality}','${child_num || 0}',
+    '${income_type}','${edu_type}','${family_type}',
+    '${occyp_type}','${family_size || 0}','${begin_month || 0}',
+    '${age || 0}','${employed || 0}','${income_mean || 0}' )`
     
     connection.query(sql, function(err, result){
         if(err) throw err;
         console.log('자료 1개를 삽입하였습니다.');
         res.send("<script> alert('정보가 등록되었습니다.'); location.href='/grade'</script>");
-    })
-
-
+    })    
 });
 
-app.get('/grade_mydata', (req,res)=>{
-    const email = req.session.member.email;
-    var sql = `SELECT * FROM user_grade WHERE email = ? ORDER BY idx DESC LIMIT 1`;
-    var values = [email]
-    connection.query(sql,values,function(err,results,fields){
-        if(err)throw err;
+// app.get('/grade_mydata', (req,res)=>{
+//     const email = req.session.member.email;
+//     var sql = `SELECT * FROM user_grade WHERE email = ? ORDER BY idx DESC LIMIT 1`;
+//     var values = [email]
+//     connection.query(sql,values,function(err,results,fields){
+//         if(err)throw err;
         
-        res.render('grade_mydata.ejs',{grade:results})
-        console.log(results)
-    })
-});
+//         res.render('grade_mydata.ejs',{grade:results})
+//         console.log(results)
+//     })
+// });

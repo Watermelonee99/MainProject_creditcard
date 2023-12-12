@@ -73,7 +73,7 @@ class CreditCardRecommendation:
         self.card_indices_and_ranks = list(enumerate(benefit_scores, 1))
 
         # 연회비와 전월실적이 낮은 순서로 정렬
-        self.card_indices_and_ranks = sorted(self.card_indices_and_ranks, key=lambda x: (self.card_data.iloc[x[0] - 1][30], self.card_data.iloc[x[0] - 1][2], -self.card_data.iloc[x[0] - 1][31], self.card_data.iloc[x[0] - 1][1]))
+        self.card_indices_and_ranks = sorted(self.card_indices_and_ranks, key=lambda x: (self.card_data.iloc[x[0] - 1][30], self.card_data.iloc[x[0] - 1][2],  self.card_data.iloc[x[0] - 1][1]))
 
         # Score를 기준으로 내림차순으로 정렬
         self.card_indices_and_ranks.sort(key=lambda x: x[1], reverse=True)

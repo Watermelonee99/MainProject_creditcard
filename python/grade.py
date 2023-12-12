@@ -3,6 +3,12 @@ import mysql.connector
 import pandas as pd
 import numpy as np
 import json
+import joblib
+
+
+model = joblib.load('C:\Users\Admin\Desktop\최종web\python\random_forest_model.joblib')
+
+
 sys.stdout.reconfigure(encoding='utf-8')
 
 db_config = {
@@ -25,11 +31,6 @@ cursor.execute('SET character_set_connection=utf8;')
 sql_query = "SELECT * FROM card_info"
 cursor.execute(sql_query)
 result_card_info = cursor.fetchall()
-
-# 두 번째 쿼리 실행
-sql_query2 = "SELECT * FROM transaction ORDER BY idx DESC LIMIT 1"
-cursor.execute(sql_query2)
-result_transaction = cursor.fetchall()
 
 # 데이터프레임 생성
 df_card_info = pd.DataFrame(result_card_info)
