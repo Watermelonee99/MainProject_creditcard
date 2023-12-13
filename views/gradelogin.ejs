@@ -1,3 +1,8 @@
+<style>
+  .main-button{
+    text-align: right;
+  }
+</style>
 <%-include('header.ejs')%>
 <div class="container">
   <div class="row">
@@ -10,15 +15,17 @@
           </div>
           <div class="form-group">
             <h4>Email</h4>
-            <input type="email" name="email" class="form-control" id="email">
+            <input type="email" name="email" class="form-control2" id="email">
             <br>
             <h4>Password</h4>
-            <input type="password" name="pw" class="form-control" id="pw">
+            <input type="password" name="pw" class="form-control2" id="pw">
           </div>
+          <br>
           <br>
           <div class="main-button">
             <a href="#" id="loginBtn">Login</a>
           </div>
+          <br>
           <div class="main-button">
             <a href="/register" role="button">Register</a>
           </div>

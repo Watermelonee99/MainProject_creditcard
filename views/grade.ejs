@@ -1,10 +1,44 @@
+<style>
+  .main-button2{
+    text-align: center;
+  }
+  .heading-section2{
+    text-align: center;
+  }
+</style>
+
 <%-include('header.ejs')%>
 
 <div class="container">
   <div class="row">
     <div class="col-lg-12">
       <div class="page-content">
+        
         <% if(user_id){ %>  
+          <!-- ***** Banner Start ***** -->
+        <div class="main-banner">
+          <div class="row">
+            <div class="col-lg-7">
+              <div class="header-text">
+                <% if(user_id){ %>
+                  <h4><%=name%>님 환영합니다 &#127804; </h4>
+                  <h4>당신의 신용도를 책임지겠습니다</h4>
+                  <br>
+                  <div class="main-button">
+                    <a href="/transaction" role="button">예측받기🔗</a>
+                  </div>
+                <%} else{ %>
+                  <h4><em>환영합니다!</em> <hr/>당신의 신용도를 책임지겠습니다.<hr /></h4>
+                  <div class="main-button">
+                    <a href="/login">예측받기🔗</a>
+                  </div>
+                <%} %>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- ***** Banner End ***** -->
           <!-- ***** Gaming Library Start ***** -->
           <div class="gaming-library1 profile-library">
             <form id="gradeForm" action="/gradeProc" method="post">
@@ -235,18 +269,18 @@
                 </ul>
               </div>
               <br>
-              <br>
               <div class="main-button">
                 <a href="#" id = gradeBtn>제출</a>
               </div>
               <%} else{ %>
-                <div class="heading-section">
+                <div class="heading-section2">
                   <h4><em>You need Login!</em></h4>
                   <br>
                 </div>
                 <div class="main-button2">
                   <a href="/gradelogin" role="button">Go to Login Page</a>
                 </div>
+                
               <%} %>
               <br>
               <br>

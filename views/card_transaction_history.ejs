@@ -1,3 +1,11 @@
+<style>
+  .main-button2{
+    text-align: center;
+  }
+  .heading-section2{
+    text-align: center;
+  }
+</style>
 <%-include('header.ejs')%>
 
 <div class="container">
@@ -164,15 +172,16 @@
                 </ul>
               </div>
               <br>
-              <br>
-              <br>
-              <div class="main-button">
-                <a href="#" id = transactionBtn>제출</a>
+              <div class="main-button3">
                 <a href="/transaction_mydata" role="button">내 정보</a>
                 <a href="/transaction_graph" role="button">시각화 버튼</a>
               </div>
+              <div class="main-button">
+                <a href="#" id = transactionBtn>제출</a>
+              </div>
+              
               <%} else{ %>
-                <div class="heading-section">
+                <div class="heading-section2">
                   <h4><em>You need Login!</em></h4>
                   <br>
                 </div>
@@ -207,186 +216,3 @@
     </div>
   </div>
 </div>
-      
-
-
-
-
-
-<%-include('header.ejs')%>
-      <% if(user_id){ %>
-        <h1 class="display-4"><%=name%>님</h1>
-        <p class="lead">당신의 소비내역을 입력해 주세요.</p>
-        <div class="jumbotron">
-          <form action = "/transactionProc" method="post">
-              <nav aria-label="breadcrumb">
-                  <ol class="breadcrumb">
-                    <li class="breadcrumb-item active" aria-current="page">소비내역</li>
-                  </ol>
-              </nav>
-              <div class="row">
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <label>교통 금액</label>
-                    <input type="number" name="교통" class="form-control" min="0" max="999999999999" placeholder="원" >
-                  </div>
-                </div>
-              
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <label>주유 금액</label>
-                    <input type="number" name="주유" class="form-control" min="0" max="999999999999" placeholder="원" >
-                  </div>
-                </div>
-              
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <label>마트 금액</label>
-                    <input type="number" name="마트" class="form-control" min="0" max="999999999999" placeholder="원" >
-                  </div>
-                </div>
-              
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <label>쇼핑 금액</label>
-                    <input type="number" name="쇼핑" class="form-control" min="0" max="999999999999" placeholder="원" >
-                  </div>
-                </div>
-
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <label>푸드 금액</label>
-                    <input type="number" name="푸드" class="form-control" min="0" max="999999999999" placeholder="원" >
-                  </div>
-                </div>
-
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <label>배달 금액</label>
-                    <input type="number" name="배달" class="form-control" min="0" max="999999999999" placeholder="원" >
-                  </div>
-                </div>
-
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <label>카페 금액</label>
-                    <input type="number" name="카페" class="form-control" min="0" max="999999999999" placeholder="원" >
-                  </div>
-                </div>
-
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <label>뷰티 금액</label>
-                    <input type="number" name="뷰티" class="form-control" min="0" max="999999999999" placeholder="원" >
-                  </div>
-                </div>
-
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <label>생활요금 금액</label>
-                    <input type="number" name="생활요금" class="form-control" min="0" max="999999999999" placeholder="원" >
-                  </div>
-                </div>
-
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <label>의료 금액</label>
-                    <input type="number" name="의료" class="form-control" min="0" max="999999999999" placeholder="원" >
-                  </div>
-                </div>
-
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <label>애완동물 금액</label>
-                    <input type="number" name="애완동물" class="form-control" min="0" max="999999999999" placeholder="원" >
-                  </div>
-                </div>
-
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <label>자동차 금액</label>
-                    <input type="number" name="자동차" class="form-control" min="0" max="999999999999" placeholder="원" >
-                  </div>
-                </div>
-
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <label>스포츠 금액</label>
-                    <input type="number" name="스포츠" class="form-control" min="0" max="999999999999" placeholder="원" >
-                  </div>
-                </div>
-
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <label>영화 금액</label>
-                    <input type="number" name="영화" class="form-control" min="0" max="999999999999" placeholder="원" >
-                  </div>
-                </div>
-
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <label>항공 금액</label>
-                    <input type="number" name="항공" class="form-control" min="0" max="999999999999" placeholder="원" >
-                  </div>
-                </div>
-
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <label>여행 금액</label>
-                    <input type="number" name="여행" class="form-control" min="0" max="999999999999" placeholder="원" >
-                  </div>
-                </div>
-
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <label>해외 금액</label>
-                    <input type="number" name="해외" class="form-control" min="0" max="999999999999" placeholder="원" >
-                  </div>
-                </div>
-
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <label>디지털구독 금액</label>
-                    <input type="number" name="디지털구독" class="form-control" min="0" max="999999999999" placeholder="원" >
-                  </div>
-                </div>
-
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <label>교육 금액</label>
-                    <input type="number" name="교육" class="form-control" min="0" max="999999999999" placeholder="원" >
-                  </div>
-                </div>
-
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <label>기타 금액</label>
-                    <input type="number" name="기타" class="form-control" min="0" max="999999999999" placeholder="원" >
-                  </div>
-                </div>
-              
-              </div>
-              
-              <button type="submit" href="/transactionProc" class="btn btn-primary">제출</button>
-              <a class="btn btn-primary" href="/transaction_mydata" role="button">내 정보</a>
-          </form> 
-          <hr />
-        </div>
-        <a class="btn btn-primary btn-lg" href="/transaction_graph" role="button">시각화 버튼</a>
-
-        
-
-
-
-
-
-
-
-
-      <%} else{ %>
-        <p class="lead">로그인이 필요합니다</p>
-        <a class="btn btn-primary btn-lg" href="/translogin" role="button">로그인!</a>
-      <%} %>
-      
-      
-<%-include('footer.ejs')%>

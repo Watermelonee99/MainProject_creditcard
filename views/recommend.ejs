@@ -1,7 +1,14 @@
-<!-- recommend.ejs -->
-<%- include('header.ejs') %>
-
-<p class="lead">선택하세요</p>
+<%-include('header.ejs')%>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="page-content">
+          <!-- ***** Gaming Library Start ***** -->
+          <div class="gaming-library1 profile-library">
+            <div class="heading-section">
+              <h4><em>선택하세요</em></h4>
+              <br>
+            </div>
 
 <form action="/recommendProc" method="post" id="categoryForm">
   <!-- Add buttons for each category -->
@@ -17,7 +24,9 @@
     </div>
   </div>
 
-  <button type="button" class="btn btn-primary btn-lg mt-3" id="viewBtn">보기</button>
+  <div class="view-btn-container">
+    <button type="button" class="btn btn-primary btn-lg mt-3" id="viewBtn">보기</button>
+  </div>
 
   <!-- Add a container to display selected categories -->
   <div id="selectedCategories" class="mt-3"></div>
@@ -26,13 +35,11 @@
   <input type="hidden" name="selectedCategories" id="selectedCategoriesInput" value="">
 
   <style>
-    body {
-      background: linear-gradient(to right, #c36ff3, #ffae66, #ffeb99) !important;
-      margin: 0;
-      font-family: 'Roboto', 'Arial', sans-serif;
-      color: #27292a;
-      text-align: center;
-      padding-top: 0px;
+    .heading-section {
+    text-align: center;
+    }
+    .view-btn-container {
+    text-align: center;
     }
 
     .lead {
@@ -140,5 +147,61 @@
     });
   </script>
 </form>
+          </div>
+          <!-- ***** Gaming Library End ***** -->
+          
+          <%-include('footer.ejs')%>
+              
+          </div>
+         
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  // JavaScript code for handling category selection and form submission
+  document.addEventListener("DOMContentLoaded", function () {
+    const categoryButtons = document.querySelectorAll(".category-btn");
+    const viewButton = document.getElementById("viewBtn");
+    const selectedCategoriesDiv = document.getElementById("selectedCategories");
+    const categoryForm = document.getElementById("categoryForm");
 
-<%- include('footer.ejs') %>
+    let selectedCategories = [];
+
+    // 카테고리 버튼에 이벤트 리스너 추가
+    categoryButtons.forEach((button) => {
+      button.addEventListener("click", function () {
+        // 버튼 클릭 시 "active" 클래스 토글
+        button.classList.toggle("active");
+
+        // 선택된 카테고리 배열 업데이트
+        const category = button.dataset.category;
+        if (selectedCategories.includes(category)) {
+          selectedCategories = selectedCategories.filter(c => c !== category);
+        } else {
+          // 최대 3개의 카테고리 선택 가능 여부 확인
+          if (selectedCategories.length < 3) {
+            selectedCategories.push(category);
+        }   else {
+            // 3개 이상의 카테고리가 선택되면 추가적인 선택을 막음
+            alert("최대 3개의 카테고리만 선택할 수 있습니다.");
+            button.classList.remove("active"); // "active" 클래스 제거
+        }
+      }
+      });
+    });
+
+    // Add event listener to the "보기" button
+    viewButton.addEventListener("click", function () {
+      // Display selected categories
+      selectedCategoriesDiv.innerHTML = `<p>선택된 카테고리: ${selectedCategories.join(', ')}</p>`;
+
+      // Update the hidden input with selected categories
+      document.getElementById("selectedCategoriesInput").value = selectedCategories.join(',');
+
+      // Submit the form with selected categories
+      categoryForm.submit();
+    });
+  });
+</script>
+
