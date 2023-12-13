@@ -570,11 +570,15 @@ app.post('/gradeProc', (req, res) => {
     '${occyp_type}','${family_size || 0}','${begin_month || 0}',
     '${Age || 0}','${EMPLOYED || 0}','${income_mean || 0}' )`
     
-    connection.query(sql, function(err, result){
-        if(err) throw err;
-        console.log('자료 1개를 삽입하였습니다.');
-        res.send("<script> alert('정보가 등록되었습니다.'); location.href='/grade'</script>");
-    })    
+    connection.query(sql, function(err, result) {
+        if (err) {
+          console.error(err);
+          res.send("<script> alert('잘못된 정보이거나 빈칸이 있습니다.'); window.history.go(-1); </script>");
+        } else {
+          console.log('자료 1개를 삽입하였습니다.');
+          res.send("<script> alert('정보가 등록되었습니다.'); location.href='/loading'; </script>");
+        }
+      });  
     
 });
 

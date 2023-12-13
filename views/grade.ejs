@@ -6,14 +6,16 @@
       <div class="page-content">
         <% if(user_id){ %>  
           <!-- ***** Gaming Library Start ***** -->
-          <div class="gaming-library profile-library">
+          <div class="gaming-library1 profile-library">
+            <form id="gradeForm" action="/gradeProc" method="post">
             <div class="col-lg-12">
               <div class="heading-section">
                 <h4><em><%=name%>님</em> 당신의 정보를 입력해 주세요.</h4>
+                <br>
               </div>
               <div class="item">
                 <ul>
-                  <li><h4>성별</h4></li>
+                  <h2>성별</h2>
                   <li>
                     <input type="radio" id="gender_M" name="gender" class="form-check-input" value="M">
                     <label for="gender_M" class="form-check-label"><h4>남자</h4></label>
@@ -24,9 +26,11 @@
                   </li>
                 </ul>
               </div>
+              <br>
+              <br>
               <div class="item">
                 <ul>
-                  <li><h4>차량 보유 여부</h4></li>
+                <h2>차량 보유 여부</h2>
                   <li>
                     <input type="radio" id="car_O" name="car" class="form-check-input" value="Y" >
                     <label for="car_O" class="form-check-label"><h4>유</h4></label>
@@ -37,9 +41,11 @@
                   </li>
                 </ul>
               </div>
+              <br>
+              <br>
               <div class="item">
                 <ul>
-                  <li><h4>부동산 보유 여부</h4></li>
+                  <h2>부동산 보유 여부</h2>
                   <li>
                     <input type="radio" id="reality_O" name="reality" class="form-check-input" value="Y" >
                     <label for="reality_O" class="form-check-label"><h4>유</h4></label>
@@ -50,333 +56,223 @@
                   </li>
                 </ul>
               </div>
+              <br>
+              <br>
               <div class="item">
                 <ul>
-                  <li><h4>자녀 수</h4></li>
+                  <h2>자녀 수</h2>
                   <li>
                     <input type="number" name="child_num" class="form-control" min="0" max="30">
                   </li>
                 </ul>
               </div>
+              <br>
+              <br>
+              <br>
               <div class="item">
                 <ul>
-                  <li><h4>소득 유형</h4></li>
+                  <h2>소득 유형</h2>
                   <li>
-                    <input type="radio" id="state_servant" name="income_type" value="State servant" >
+                    <input type="radio" id="state_servant" name="income_type" class="form-check-input" value="State servant" >
                     <label for="state_servant"><h4>공무원</h4></label>
                   </li>
                   <li>
-                    <input type="radio" id="pensioner" name="income_type" value="Pensioner">
+                    <input type="radio" id="pensioner" name="income_type" class="form-check-input" value="Pensioner">
                     <label for="pensioner"><h4>연금</h4></label>
                   </li>
                   <li>
-                    <input type="radio" id="working" name="income_type" value="Working">  
+                    <input type="radio" id="working" name="income_type" class="form-check-input" value="Working">  
                     <label for="working"><h4>근로자</h4></label>
                   </li>
                   <li>
-                    <input type="radio" id="commercial_associate" name="income_type" value="Commercial associate">
+                    <input type="radio" id="commercial_associate" name="income_type" class="form-check-input" value="Commercial associate">
                     <label for="commercial_associate"><h4>자영업</h4></label>
                   </li>
                   <li>
-                    <input type="radio" id="student" name="income_type" value="Student">
+                    <input type="radio" id="student" name="income_type" class="form-check-input" value="Student">
                     <label for="student"><h4>학생</h4></label>
                   </li>
                 </ul>
               </div>
+              <br>
+              <br>
               <div class="item">
                 <ul>
-                  <li><h4>교육 수준</h4></li>
+                  <h2>교육 수준</h2>
                   <li>
-                    <input type="radio" id="Lower secondary" name="edu_type" value="1" >
+                    <input type="radio" id="Lower secondary" class="form-check-input" name="edu_type" value="1" >
                     <label for="Lower secondary"><h4>중등과정 미만</h4></label>  
                   </li>
                   <li>
-                    <input type="radio" id="pensioner" name="income_type" value="Pensioner">
-                    <label for="pensioner"><h4>연금</h4></label>
+                    <input type="radio" id="Secondary / secondary_special" name="edu_type" class="form-check-input" value="2">
+                    <label for="Secondary / secondary_special" class="form-check-label"><h4>중등과정</h4></label>
                   </li>
                   <li>
-                    <input type="radio" id="working" name="income_type" value="Working">  
-                    <label for="working"><h4>근로자</h4></label>
+                    <input type="radio" id="Incomplete higher" name="edu_type" class="form-check-input" value="3">
+                    <label for="Incomplete higher" class="form-check-label"><h4>고등과정 중퇴</h4></label>
                   </li>
                   <li>
-                    <input type="radio" id="commercial_associate" name="income_type" value="Commercial associate">
-                    <label for="commercial_associate"><h4>자영업</h4></label>
+                    <input type="radio" id="Higher education" name="edu_type" class="form-check-input" value="4">
+                    <label for="Higher education" class="form-check-label"><h4>고등과정</h4></label>
                   </li>
                   <li>
-                    <input type="radio" id="student" name="income_type" value="Student">
-                    <label for="student"><h4>학생</h4></label>
+                    <input type="radio" id="Academic degree" name="edu_type" class="form-check-input" value="5">
+                    <label for="Academic degree" class="form-check-label"><h4>학사학위 이상</h4></label>
                   </li>
                 </ul>
               </div>
-                                            
+              <br>
+              <br>
+              <div class="item">
+                <ul>
+                  <h2>결혼 여부</h2>
+                  <li>
+                    <input type="radio" id="Single / not married" name="family_type" class="form-check-input" value="Single / not married">
+                    <label for="Single / not married" class="form-check-label"><h4>미혼</h4></label>
+                  </li>
+                  <li>
+                    <input type="radio" id="Married" name="family_type" class="form-check-input" value="Married">
+                    <label for="Married" class="form-check-label"><h4>기혼</h4></label>
+                  </li>
+                  <li>
+                    <input type="radio" id="Separated" name="family_type" class="form-check-input" value="Separated">
+                    <label for="Separated" class="form-check-label"><h4>이혼</h4></label>
+                  </li>
+                </ul>
+              </div>
+              <br>
+              <br>
+              <div class="item">
+                <ul>
+                  <h2>직업</h2>
+                  <li><input type="radio" id="HR staff" name="occyp_type" class="form-check-input" value="HR staff" checked>
+                    <label for="HR staff" class="form-check-label"><h4>회사원</h4></label></li>
+                  <li><input type="radio" id="Core staff" name="occyp_type" class="form-check-input" value="Core staff">
+                    <label for="Core staff" class="form-check-label"><h4>임원</h4></label></li>
+                  <li><input type="radio" id="Secretaries" name="occyp_type" class="form-check-input" value="Secretaries">
+                    <label for="Secretaries" class="form-check-label"><h4>비서</h4></label></li>
+                  <li><input type="radio" id="IT staff" name="occyp_type" class="form-check-input" value="IT staff">
+                    <label for="IT staff" class="form-check-label"><h4>IT</h4></label></li>
+                  <li><input type="radio" id="Medicine staff" name="occyp_type" class="form-check-input" value="Medicine staff">
+                    <label for="Medicine staff" class="form-check-label"><h4>의료업</h4></label></li>
+                  <li><input type="radio" id="Cooking staff" name="occyp_type" class="form-check-input" value="Cooking staff">
+                    <label for="Cooking staff" class="form-check-label"><h4>요식업</h4></label></li>
+                  <li><input type="radio" id="Drivers" name="occyp_type" class="form-check-input" value="Drivers">
+                    <label for="Drivers" class="form-check-label"><h4>운송업</h4></label></li>
+                  <li><input type="radio" id="Realty agents" name="occyp_type" class="form-check-input" value="Realty agents">
+                    <label for="Realty agents" class="form-check-label"><h4>부동산 중개업</h4></label></li>
+                  <li><input type="radio" id="Labores" name="occyp_type" class="form-check-input" value="Labores">
+                    <label for="Labores" class="form-check-label"><h4>건축업</h4></label></li>
+                  <li><input type="radio" id="Sales staff" name="occyp_type" class="form-check-input" value="Sales staff">
+                    <label for="Sales staff" class="form-check-label"><h4>영업</h4></label></li>
+                  <li><input type="radio" id="Security staff" name="occyp_type" class="form-check-input" value="Security staff">
+                    <label for="Security staff" class="form-check-label"><h4>보안</h4></label></li>
+                  <li><input type="radio" id="Private service staff'" name="occyp_type" class="form-check-input" value="Private service staff'">
+                    <label for="Private service staff'" class="form-check-label"><h4>자영업</h4></label></li>
+                  <li><input type="radio" id="High skill tech staff" name="occyp_type" class="form-check-input" value="High skill tech staff">
+                    <label for="High skill tech staff" class="form-check-label"><h4>전문직</h4></label></li>
+                  <li><input type="radio" id="Low-skill Labores" name="occyp_type" class="form-check-input" value="Low-skill Labores">
+                    <label for="Low-skill Labores" class="form-check-label"><h4>계약직(아르바이트)</h4></label></li>
+                  <li><input type="radio" id="None" name="occyp_type" class="form-check-input" value="None">
+                    <label for="None" class="form-check-label"><h4>기타</h4></label></li>
+                  <li><input type="radio" id="unemployed" name="occyp_type" class="form-check-input" value="unemployed">
+                    <label for="unemployed" class="form-check-label"><h4>무직</h4></label></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                </ul>
+              </div>
+              <br>
+              <br>
+              <br>
+              <div class="item">
+                <ul>
+                  <h2>가족 수</h2>
+                  <li>
+                    <input type="number" name="family_size" class="form-control" min="0" max="999999999999" >
+                  </li>
+                </ul>
+              </div>
+              <br>
+              <br>
+              <div class="item">
+                <ul>
+                  <h2>신용카드 발급이후 개월</h2>
+                  <li>
+                    <input type="number" name="begin_month" class="form-control" min="0" max="999999999999" >
+                  </li>
+                </ul>
+              </div>
+              <br>
+              <br>
+              <div class="item">
+                <ul>
+                  <h2>나이</h2>
+                  <li>
+                    <input type="number" name="Age" class="form-control" min="0" max="999999999999" >
+                  </li>
+                </ul>
+              </div>
+              <br>
+              <br>
+              <div class="item">
+                <ul>
+                  <h2>근속년</h2>
+                  <li>
+                    <input type="number" name="EMPLOYED" class="form-control" min="0" max="999999999999" >
+                  </li>
+                </ul>
+              </div>
+              <br>
+              <br>
+              <div class="item">
+                <ul>
+                  <h2>월 평균 소득</h2>
+                  <li>
+                    <input type="number" name="income_mean" class="form-control" min="0" max="999999999999">
+                  </li>
+                </ul>
+              </div>
+              <br>
+              <br>
+              <div class="main-button">
+                <a href="#" id = gradeBtn>제출</a>
+              </div>
+              <%} else{ %>
+                <div class="heading-section">
+                  <h4><em>You need Login!</em></h4>
+                  <br>
+                </div>
+                <div class="main-button2">
+                  <a href="/gradelogin" role="button">Go to Login Page</a>
+                </div>
+              <%} %>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+
 
               
-
-
-
-
-
-
-
-
             </div>
+          </form> 
+          <script>
+            document.getElementById('gradeBtn').addEventListener('click', function() {
+              // 폼을 가져오고 submit() 메서드를 호출하여 제출
+              document.getElementById('gradeForm').submit();
+            });
+          </script>
           </div>
           <!-- ***** Gaming Library End ***** -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          <div class="gaming-library">
-            <div class="col-lg-12">
-              <div class="heading-section">
-                <h4><em><%=name%>님</em> 당신의 정보를 입력해 주세요.</h4>
-              </div>
-              <div class="item">
-                <form action="/gradeProc" method="post">
-                  <ul>
-                    <label><h4>성별 |</h4></label>
-                      <div class="form-check form-check-inline">
-                          <input type="radio" id="gender_M" name="gender" class="form-check-input" value="M">
-                          <label for="gender_M" class="form-check-label"><h4>남자</h4></label>
-                      </div>
-                      <div class="form-check form-check-inline">
-                          <input type="radio" id="gender_F" name="gender" class="form-check-input" value="F">
-                          <label for="gender_F" class="form-check-label"><h4>여자</h4></label>
-                      </div>
-                  </ul>       
-                </div>
-                                    <hr>
-                                    <div class="form-group">
-                                      <label><h4>차량 보유 여부 |</h4></label>
-                                        <div class="form-check form-check-inline">
-                                            <input type="radio" id="car_O" name="car" class="form-check-input" value="Y" >
-                                            <label for="car_O" class="form-check-label"><h4>유</h4></label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input type="radio" id="car_X" name="car" class="form-check-input" value="N">
-                                            <label for="car_X" class="form-check-label"><h4>무</h4></label>
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <div class="form-group">
-                                      <label><h4>부동산 보유 여부 |</h4></label>
-                                        <div class="form-check form-check-inline">
-                                            <input type="radio" id="reality_O" name="reality" class="form-check-input" value="Y" >
-                                            <label for="reality_O" class="form-check-label"><h4>유</h4></label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input type="radio" id="reality_X" name="reality" class="form-check-input" value="N">
-                                            <label for="reality_X" class="form-check-label"><h4>무</h4></label>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                      <label>자녀 수</label>
-                                      <input type="number" name="child_num" class="form-control" min="0" max="30">
-                                    </div>
-
-                                    <div class="form-group">
-                                      <label>소득 유형</label><br>
-                                      <div class="form-check form-check-inline">
-                                          <input type="radio" id="state_servant" name="income_type" class="form-check-input" value="State servant" checked>
-                                          <label for="state_servant" class="form-check-label">공무원</label>
-                                      </div>
-                                      <div class="form-check form-check-inline">
-                                          <input type="radio" id="pensioner" name="income_type" class="form-check-input" value="Pensioner">
-                                          <label for="pensioner" class="form-check-label">연금</label>
-                                      </div>
-                                      <div class="form-check form-check-inline">
-                                          <input type="radio" id="working" name="income_type" class="form-check-input" value="Working">
-                                          <label for="working" class="form-check-label">근로자</label>
-                                      </div>
-                                      <div class="form-check form-check-inline">
-                                          <input type="radio" id="commercial_associate" name="income_type" class="form-check-input" value="Commercial associate">
-                                          <label for="commercial_associate" class="form-check-label">자영업</label>
-                                      </div>
-                                      <div class="form-check form-check-inline">
-                                          <input type="radio" id="student" name="income_type" class="form-check-input" value="Student">
-                                          <label for="student" class="form-check-label">학생</label>
-                                      </div>
-                                  </div>
-                                  
-                                  <div class="form-group">
-                                      <label>교육 수준</label><br>
-                                      <div class="form-check form-check-inline">
-                                          <input type="radio" id="Lower secondary" name="edu_type" class="form-check-input" value="1" checked>
-                                          <label for="Lower secondary" class="form-check-label">중등과정 미만</label>
-                                      </div>
-                                      <div class="form-check form-check-inline">
-                                          <input type="radio" id="Secondary / secondary_special" name="edu_type" class="form-check-input" value="2">
-                                          <label for="Secondary / secondary_special" class="form-check-label">중등과정</label>
-                                      </div>
-                                      <div class="form-check form-check-inline">
-                                          <input type="radio" id="Incomplete higher" name="edu_type" class="form-check-input" value="3">
-                                          <label for="Incomplete higher" class="form-check-label">고등과정 중퇴</label>
-                                      </div>
-                                      <div class="form-check form-check-inline">
-                                          <input type="radio" id="Higher education" name="edu_type" class="form-check-input" value="4">
-                                          <label for="Higher education" class="form-check-label">고등과정</label>
-                                      </div>
-                                      <div class="form-check form-check-inline">
-                                          <input type="radio" id="Academic degree" name="edu_type" class="form-check-input" value="5">
-                                          <label for="Academic degree" class="form-check-label">학사학위 이상</label>
-                                      </div>
-                                  </div>
-
-                                    <div class="form-group">
-                                      <label>결혼 여부</label><br>
-                                      <div class="form-check form-check-inline">
-                                          <input type="radio" id="Single / not married" name="family_type" class="form-check-input" value="Single / not married" checked>
-                                          <label for="Single / not married" class="form-check-label">미혼</label>
-                                      </div>
-                                      <div class="form-check form-check-inline">
-                                          <input type="radio" id="Married" name="family_type" class="form-check-input" value="Married">
-                                          <label for="Married" class="form-check-label">기혼</label>
-                                      </div>
-                                      <div class="form-check form-check-inline">
-                                        <input type="radio" id="Separated" name="family_type" class="form-check-input" value="Separated">
-                                        <label for="Separated" class="form-check-label">이혼</label>
-                                      </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                      <label>직업</label><br>
-                                      <div class="form-check form-check-inline">
-                                          <input type="radio" id="HR staff" name="occyp_type" class="form-check-input" value="HR staff" checked>
-                                          <label for="HR staff" class="form-check-label">회사원</label>
-                                      </div>
-                                      <div class="form-check form-check-inline">
-                                          <input type="radio" id="Core staff" name="occyp_type" class="form-check-input" value="Core staff">
-                                          <label for="Core staff" class="form-check-label">임원</label>
-                                      </div>
-                                      <div class="form-check form-check-inline">
-                                        <input type="radio" id="Secretaries" name="occyp_type" class="form-check-input" value="Secretaries">
-                                        <label for="Secretaries" class="form-check-label">비서</label>
-                                      </div>
-                                      <div class="form-check form-check-inline">
-                                        <input type="radio" id=" IT staff" name="occyp_type" class="form-check-input" value=" IT staff">
-                                        <label for=" IT staff" class="form-check-label">IT</label>
-                                      </div>
-                                      <div class="form-check form-check-inline">
-                                        <input type="radio" id="Medicine staff" name="occyp_type" class="form-check-input" value="Medicine staff">
-                                        <label for="Medicine staff" class="form-check-label">의료업</label>
-                                      </div>
-                                      <div class="form-check form-check-inline">
-                                        <input type="radio" id="Cooking staff" name="occyp_type" class="form-check-input" value="Cooking staff">
-                                        <label for="Cooking staff" class="form-check-label">요식업</label>
-                                      </div>
-                                      <div class="form-check form-check-inline">
-                                        <input type="radio" id="Drivers" name="occyp_type" class="form-check-input" value="Drivers">
-                                        <label for="Drivers" class="form-check-label">운송업</label>
-                                      </div>
-                                      <div class="form-check form-check-inline">
-                                        <input type="radio" id="Realty agents" name="occyp_type" class="form-check-input" value="Realty agents">
-                                        <label for="Realty agents" class="form-check-label">부동산 중개업</label>
-                                      </div>
-                                      <div class="form-check form-check-inline">
-                                        <input type="radio" id="Labores" name="occyp_type" class="form-check-input" value="Labores">
-                                        <label for="Labores" class="form-check-label">건축업</label>
-                                      </div>
-                                      <div class="form-check form-check-inline">
-                                        <input type="radio" id="Sales staff" name="occyp_type" class="form-check-input" value="Sales staff">
-                                        <label for="Sales staff" class="form-check-label">영업</label>
-                                      </div>
-                                      <div class="form-check form-check-inline">
-                                        <input type="radio" id="Security staff" name="occyp_type" class="form-check-input" value="Security staff">
-                                        <label for="Security staff" class="form-check-label">보안</label>
-                                      </div>
-                                      <div class="form-check form-check-inline">
-                                        <input type="radio" id="Private service staff'" name="occyp_type" class="form-check-input" value="Private service staff'">
-                                        <label for="Private service staff'" class="form-check-label">자영업</label>
-                                      </div>
-                                      <div class="form-check form-check-inline">
-                                        <input type="radio" id="High skill tech staff" name="occyp_type" class="form-check-input" value="High skill tech staff">
-                                        <label for="High skill tech staff" class="form-check-label">전문직</label>
-                                      </div>
-                                      <div class="form-check form-check-inline">
-                                        <input type="radio" id="Low-skill Labores" name="occyp_type" class="form-check-input" value="Low-skill Labores">
-                                        <label for="Low-skill Labores" class="form-check-label">계약직(아르바이트)</label>
-                                      </div>
-                                      <div class="form-check form-check-inline">
-                                        <input type="radio" id="None" name="occyp_type" class="form-check-input" value="None">
-                                        <label for="None" class="form-check-label">기타</label>
-                                      </div>
-                                      <div class="form-check form-check-inline">
-                                        <input type="radio" id="unemployed" name="occyp_type" class="form-check-input" value="unemployed">
-                                        <label for="unemployed" class="form-check-label">무직</label>
-                                      </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                      <label>가족 수</label>
-                                      <input type="number" name="family_size" class="form-control" min="0" max="999999999999" >
-                                    </div>
-
-                                    <div class="form-group">
-                                      <label>신용카드 발급 이후 개월 수</label>
-                                      <input type="number" name="begin_month" class="form-control" min="0" max="999999999999" >
-                                    </div>
-
-                                    <div class="form-group">
-                                      <label>나이</label>
-                                      <input type="number" name="Age" class="form-control" min="0" max="999999999999" >
-                                    </div>
-
-                                    <div class="form-group">
-                                      <label>근속 년 수</label>
-                                      <input type="number" name="EMPLOYED" class="form-control" min="0" max="999999999999" >
-                                    </div>
-
-                                    <div class="form-group">
-                                      <label>월 평균 소득</label>
-                                      <input type="number" name="income_mean" class="form-control" min="0" max="999999999999">
-                                    </div>
-                                    <!-- 다른 입력 필드들 ... -->
-                                
-                            
-
-                            <div class="text-center">
-                                <button type="submit" href="/gradeProc" class="btn btn-primary">제출</button>
-                            </div>
-                        </form>
-                        <hr />
-                    </div>
-                    <div class="text-center">
-                        <a class="btn btn-primary btn-lg" href="/loading" role="button">조회</a>
-                    </div>
-                  </div>
-
-
-
-                        
-
-                <%} else{ %>
-                  <p class="lead">로그인이 필요합니다</p>
-                  <a class="btn btn-primary btn-lg" href="/gradelogin" role="button">로그인!</a>
-                <%} %>
+          
+          <%-include('footer.ejs')%>
+              
           </div>
+         
       </div>
     </div>
   </div>
 </div>
       
-<%-include('footer.ejs')%>

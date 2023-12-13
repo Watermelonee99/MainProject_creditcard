@@ -37,7 +37,7 @@ columns = ['gender', 'car', 'reality', 'child_num', 'income_type', 'edu_type', '
 df_user_data = pd.DataFrame(user_data, columns=columns)
 print(df_user_data)
 
-model = joblib.load('C:/Users/Admin/Desktop/최종web/python/random_forest_model.joblib')
+model = joblib.load('C:/Users/Admin/Desktop/main/최종web/python/random_forest_model.joblib')
 
 predictions = model.predict(df_user_data)
 
