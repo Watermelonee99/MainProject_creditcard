@@ -370,7 +370,7 @@ app.post('/recommendProc', (req, res) => {
             // 'result' 데이터를 app.locals에 저장
             app.locals.cardDetailResult = result;
 
-            res.send("<script> alert('선택되었습니다.'); location.href='/card-detail'</script>");
+            res.send("<script>location.href='/card-detail'</script>");
         });
     } else {
         res.send("<script> alert('선택된 카테고리가 없습니다.'); location.href='/recommend'</script>");
@@ -576,7 +576,7 @@ app.post('/gradeProc', (req, res) => {
           res.send("<script> alert('잘못된 정보이거나 빈칸이 있습니다.'); window.history.go(-1); </script>");
         } else {
           console.log('자료 1개를 삽입하였습니다.');
-          res.send("<script> alert('정보가 등록되었습니다.'); location.href='/loading'; </script>");
+          res.send("<script>  location.href='/loading'; </script>");
         }
       });  
     

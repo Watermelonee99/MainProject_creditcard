@@ -26,6 +26,24 @@ font & reset css
 --------------------------------------------- 
 */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900");
+@font-face {
+  font-family: 'NanumSquareRound';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'GmarketSansMedium';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'YClover-Bold';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_231029@1.1/YClover-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
 /* 
 ---------------------------------------------
 reset
@@ -84,7 +102,7 @@ header, nav, section, article, aside, footer, hgroup {
 }
 
 html, body {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'GmarketSansMedium';
   font-weight: 400;
   background-color: #1e1e1e;
   font-size: 16px;
@@ -131,7 +149,7 @@ Global Styles
 html,
 body {
   background: #000000;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'GmarketSansMedium';
   
   
   
@@ -371,8 +389,8 @@ Pre-loader Style
   opacity: 1;
   visibility: visible;
   z-index: 9999;
-  -webkit-transition: opacity 0.25s ease;
-  transition: opacity 0.25s ease;
+  -webkit-transition: opacity 20s ease ;
+  transition: opacity 20s ease ;
 }
 
 .js-preloader.loaded {
@@ -473,10 +491,10 @@ Header Style
 }
 
 .header-area {
-  background-color: transparent;
+  background-color: #000;
   position: absolute;
   height: 100px;
-  top: 15px;
+  top: 0;
   left: 0;
   right: 0;
   z-index: 100;
@@ -490,13 +508,13 @@ Header Style
   min-height: 80px;
   background: transparent;
   display: flex;
-  padding: 15px 0px;
+  padding: 30px 0px;
   border-radius: 50px;
 }
 
 .background-header .main-nav {
   padding: 0px;
-  background-color: transparent;
+  background-color: #000;
 }
 
 .header-area .main-nav #search {
@@ -1197,7 +1215,8 @@ Gaming Library Style
   font-size: 50px;
   text-align: right;
 }
-
+/* 
+---------------------------------------------
 Gaming Library Style
 --------------------------------------------- 
 */

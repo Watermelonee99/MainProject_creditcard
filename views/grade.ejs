@@ -5,6 +5,19 @@
   .heading-section2{
     text-align: center;
   }
+    /* 다른 스타일들 ... */
+
+    .form-check-input {
+    /* 원하는 버튼 크기로 조정하세요 */
+    width: 30px;
+    height: 30px;
+    font-size: 1.5rem; /* 원하는 폰트 크기로 조정하세요 */
+    /* 다른 스타일들 ... */
+  }
+
+  .form-check-label h4 {
+    font-size: 1.5rem !important; /* 원하는 폰트 크기로 조정하세요 */
+  }
 </style>
 
 <%-include('header.ejs')%>
@@ -25,7 +38,7 @@
                   <h4>당신의 신용도를 책임지겠습니다</h4>
                   <br>
                   <div class="main-button">
-                    <a href="/transaction" role="button">예측받기🔗</a>
+                    <a href="/grade" role="button">예측받기🔗</a>
                   </div>
                 <%} else{ %>
                   <h4><em>환영합니다!</em> <hr/>당신의 신용도를 책임지겠습니다.<hr /></h4>
@@ -51,11 +64,11 @@
                 <ul>
                   <h2>성별</h2>
                   <li>
-                    <input type="radio" id="gender_M" name="gender" class="form-check-input" value="M">
+                    <input type="radio" id="gender_M" name="gender" class="form-check-input" value="0">
                     <label for="gender_M" class="form-check-label"><h4>남자</h4></label>
                   </li>
                   <li>
-                    <input type="radio" id="gender_F" name="gender" class="form-check-input" value="F">
+                    <input type="radio" id="gender_F" name="gender" class="form-check-input" value="1">
                     <label for="gender_F" class="form-check-label"><h4>여자</h4></label>
                   </li>
                 </ul>
@@ -66,11 +79,11 @@
                 <ul>
                 <h2>차량 보유 여부</h2>
                   <li>
-                    <input type="radio" id="car_O" name="car" class="form-check-input" value="Y" >
+                    <input type="radio" id="car_O" name="car" class="form-check-input" value="1" >
                     <label for="car_O" class="form-check-label"><h4>유</h4></label>
                   </li>
                   <li>
-                    <input type="radio" id="car_X" name="car" class="form-check-input" value="N">
+                    <input type="radio" id="car_X" name="car" class="form-check-input" value="0">
                     <label for="car_X" class="form-check-label"><h4>무</h4></label>
                   </li>
                 </ul>
@@ -81,11 +94,11 @@
                 <ul>
                   <h2>부동산 보유 여부</h2>
                   <li>
-                    <input type="radio" id="reality_O" name="reality" class="form-check-input" value="Y" >
+                    <input type="radio" id="reality_O" name="reality" class="form-check-input" value="1" >
                     <label for="reality_O" class="form-check-label"><h4>유</h4></label>
                   </li>
                   <li>
-                    <input type="radio" id="reality_X" name="reality" class="form-check-input" value="N">
+                    <input type="radio" id="reality_X" name="reality" class="form-check-input" value="0">
                     <label for="reality_X" class="form-check-label"><h4>무</h4></label>
                   </li>
                 </ul>
@@ -107,24 +120,24 @@
                 <ul>
                   <h2>소득 유형</h2>
                   <li>
-                    <input type="radio" id="state_servant" name="income_type" class="form-check-input" value="State servant" >
-                    <label for="state_servant"><h4>공무원</h4></label>
+                    <input type="radio" id="state_servant" name="income_type" class="form-check-input" value="3" >
+                    <label for="state_servant"class="form-check-label"><h4>공무원</h4></label>
                   </li>
                   <li>
-                    <input type="radio" id="pensioner" name="income_type" class="form-check-input" value="Pensioner">
-                    <label for="pensioner"><h4>연금</h4></label>
+                    <input type="radio" id="pensioner" name="income_type" class="form-check-input" value="4">
+                    <label for="pensioner"class="form-check-label"><h4>연금</h4></label>
                   </li>
                   <li>
-                    <input type="radio" id="working" name="income_type" class="form-check-input" value="Working">  
-                    <label for="working"><h4>근로자</h4></label>
+                    <input type="radio" id="working" name="income_type" class="form-check-input" value="2">  
+                    <label for="working"class="form-check-label"><h4>근로자</h4></label>
                   </li>
                   <li>
-                    <input type="radio" id="commercial_associate" name="income_type" class="form-check-input" value="Commercial associate">
-                    <label for="commercial_associate"><h4>자영업</h4></label>
+                    <input type="radio" id="commercial_associate" name="income_type" class="form-check-input" value="1">
+                    <label for="commercial_associate"class="form-check-label"><h4>자영업</h4></label>
                   </li>
                   <li>
-                    <input type="radio" id="student" name="income_type" class="form-check-input" value="Student">
-                    <label for="student"><h4>학생</h4></label>
+                    <input type="radio" id="student" name="income_type" class="form-check-input" value="5">
+                    <label for="student"class="form-check-label"><h4>학생</h4></label>
                   </li>
                 </ul>
               </div>
@@ -135,7 +148,7 @@
                   <h2>교육 수준</h2>
                   <li>
                     <input type="radio" id="Lower secondary" class="form-check-input" name="edu_type" value="1" >
-                    <label for="Lower secondary"><h4>중등과정 미만</h4></label>  
+                    <label for="Lower secondary"class="form-check-label"><h4>중등과정 미만</h4></label>  
                   </li>
                   <li>
                     <input type="radio" id="Secondary / secondary_special" name="edu_type" class="form-check-input" value="2">
@@ -161,15 +174,15 @@
                 <ul>
                   <h2>결혼 여부</h2>
                   <li>
-                    <input type="radio" id="Single / not married" name="family_type" class="form-check-input" value="Single / not married">
+                    <input type="radio" id="Single / not married" name="family_type" class="form-check-input" value="1">
                     <label for="Single / not married" class="form-check-label"><h4>미혼</h4></label>
                   </li>
                   <li>
-                    <input type="radio" id="Married" name="family_type" class="form-check-input" value="Married">
+                    <input type="radio" id="Married" name="family_type" class="form-check-input" value="2">
                     <label for="Married" class="form-check-label"><h4>기혼</h4></label>
                   </li>
                   <li>
-                    <input type="radio" id="Separated" name="family_type" class="form-check-input" value="Separated">
+                    <input type="radio" id="Separated" name="family_type" class="form-check-input" value="3">
                     <label for="Separated" class="form-check-label"><h4>이혼</h4></label>
                   </li>
                 </ul>
@@ -179,37 +192,35 @@
               <div class="item">
                 <ul>
                   <h2>직업</h2>
-                  <li><input type="radio" id="HR staff" name="occyp_type" class="form-check-input" value="HR staff" checked>
+                  <li><input type="radio" id="HR staff" name="occyp_type" class="form-check-input" value="16" >
                     <label for="HR staff" class="form-check-label"><h4>회사원</h4></label></li>
-                  <li><input type="radio" id="Core staff" name="occyp_type" class="form-check-input" value="Core staff">
+                  <li><input type="radio" id="Core staff" name="occyp_type" class="form-check-input" value="5">
                     <label for="Core staff" class="form-check-label"><h4>임원</h4></label></li>
-                  <li><input type="radio" id="Secretaries" name="occyp_type" class="form-check-input" value="Secretaries">
+                  <li><input type="radio" id="Secretaries" name="occyp_type" class="form-check-input" value="15">
                     <label for="Secretaries" class="form-check-label"><h4>비서</h4></label></li>
-                  <li><input type="radio" id="IT staff" name="occyp_type" class="form-check-input" value="IT staff">
+                  <li><input type="radio" id="IT staff" name="occyp_type" class="form-check-input" value="17">
                     <label for="IT staff" class="form-check-label"><h4>IT</h4></label></li>
-                  <li><input type="radio" id="Medicine staff" name="occyp_type" class="form-check-input" value="Medicine staff">
+                  <li><input type="radio" id="Medicine staff" name="occyp_type" class="form-check-input" value="7">
                     <label for="Medicine staff" class="form-check-label"><h4>의료업</h4></label></li>
-                  <li><input type="radio" id="Cooking staff" name="occyp_type" class="form-check-input" value="Cooking staff">
+                  <li><input type="radio" id="Cooking staff" name="occyp_type" class="form-check-input" value="14">
                     <label for="Cooking staff" class="form-check-label"><h4>요식업</h4></label></li>
-                  <li><input type="radio" id="Drivers" name="occyp_type" class="form-check-input" value="Drivers">
+                  <li><input type="radio" id="Drivers" name="occyp_type" class="form-check-input" value="6">
                     <label for="Drivers" class="form-check-label"><h4>운송업</h4></label></li>
-                  <li><input type="radio" id="Realty agents" name="occyp_type" class="form-check-input" value="Realty agents">
+                  <li><input type="radio" id="Realty agents" name="occyp_type" class="form-check-input" value="10">
                     <label for="Realty agents" class="form-check-label"><h4>부동산 중개업</h4></label></li>
-                  <li><input type="radio" id="Labores" name="occyp_type" class="form-check-input" value="Labores">
+                  <li><input type="radio" id="Labores" name="occyp_type" class="form-check-input" value="1">
                     <label for="Labores" class="form-check-label"><h4>건축업</h4></label></li>
-                  <li><input type="radio" id="Sales staff" name="occyp_type" class="form-check-input" value="Sales staff">
+                  <li><input type="radio" id="Sales staff" name="occyp_type" class="form-check-input" value="3">
                     <label for="Sales staff" class="form-check-label"><h4>영업</h4></label></li>
-                  <li><input type="radio" id="Security staff" name="occyp_type" class="form-check-input" value="Security staff">
+                  <li><input type="radio" id="Security staff" name="occyp_type" class="form-check-input" value="11">
                     <label for="Security staff" class="form-check-label"><h4>보안</h4></label></li>
-                  <li><input type="radio" id="Private service staff'" name="occyp_type" class="form-check-input" value="Private service staff'">
+                  <li><input type="radio" id="Private service staff'" name="occyp_type" class="form-check-input" value="13">
                     <label for="Private service staff'" class="form-check-label"><h4>자영업</h4></label></li>
-                  <li><input type="radio" id="High skill tech staff" name="occyp_type" class="form-check-input" value="High skill tech staff">
+                  <li><input type="radio" id="High skill tech staff" name="occyp_type" class="form-check-input" value="4">
                     <label for="High skill tech staff" class="form-check-label"><h4>전문직</h4></label></li>
-                  <li><input type="radio" id="Low-skill Labores" name="occyp_type" class="form-check-input" value="Low-skill Labores">
-                    <label for="Low-skill Labores" class="form-check-label"><h4>계약직(아르바이트)</h4></label></li>
-                  <li><input type="radio" id="None" name="occyp_type" class="form-check-input" value="None">
-                    <label for="None" class="form-check-label"><h4>기타</h4></label></li>
-                  <li><input type="radio" id="unemployed" name="occyp_type" class="form-check-input" value="unemployed">
+                  <li><input type="radio" id="Low-skill Labores" name="occyp_type" class="form-check-input" value="18">
+                    <label for="Low-skill Labores" class="form-check-label"><h4>계약직(알바)</h4></label></li>
+                  <li><input type="radio" id="unemployed" name="occyp_type" class="form-check-input" value="9">
                     <label for="unemployed" class="form-check-label"><h4>무직</h4></label></li>
                   <li></li>
                   <li></li>
@@ -274,13 +285,20 @@
               </div>
               <%} else{ %>
                 <div class="heading-section2">
-                  <h4><em>You need Login!</em></h4>
+                  <h4 style="font-family: 'Poppins', sans-serif;"><em>You need Login!</em></h4>
                   <br>
                 </div>
                 <div class="main-button2">
-                  <a href="/gradelogin" role="button">Go to Login Page</a>
+                  <a href="/gradelogin" role="button" style="font-family: 'Poppins', sans-serif;">Go to Login Page</a>
                 </div>
-                
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <%-include('footer.ejs')%>
               <%} %>
               <br>
               <br>

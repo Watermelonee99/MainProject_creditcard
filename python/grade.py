@@ -35,19 +35,15 @@ user_data = cursor.fetchall()
 
 columns = ['gender', 'car', 'reality', 'child_num', 'income_type', 'edu_type', 'family_type', 'occyp_type', 'family_size', 'begin_month', 'Age', 'EMPLOYED', 'income_mean']
 df_user_data = pd.DataFrame(user_data, columns=columns)
-print(df_user_data)
 
 model = joblib.load('C:/Users/Admin/Desktop/main/최종web/python/random_forest_model.joblib')
 
 predictions = model.predict(df_user_data)
 
-print(predictions)
 result = ''
-if predictions == 0:
-    result = '하'
-elif predictions == 1:
-    result = '중'
+if predictions == 1:
+    result = '당신은 연체 가능성이 낮습니다. \n하지만 but! 보다 나은 어쩌구를 위한 카드를 추천드립니다.'
 elif predictions == 2:
-    result = '상'
+    result = '당신은 연체 가능성이 높습니다. \n당신의 신용도 회복을 위한 카드를 추천드립니다.'
 
 print(result)

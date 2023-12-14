@@ -11,11 +11,11 @@
                 <div class="col-lg-7">
                   <div class="header-text">
                     <% if(user_id){ %>
-                      <h4><%=name%>님 환영합니다 &#127804; </h4>
+                      <h4><em><%=name%>님</em> 환영합니다 &#127804; </h4>
                       <h4>당신의 신용도를 책임지겠습니다</h4>
                       <br>
                       <div class="main-button">
-                        <a href="/transaction" role="button">예측받기🔗</a>
+                        <a href="/grade" role="button">예측받기🔗</a>
                       </div>
                     <%} else{ %>
                       <h4><em>환영합니다!</em> <hr/>당신의 신용도를 책임지겠습니다.<hr /></h4>
@@ -35,7 +35,7 @@
               <div class="col-lg-8">
                 <div class="featured-games header-text">
                   <div class="heading-section">
-                    <h4><em>Most Popular</em> Credit Card</h4>
+                    <h4 style="font-family: 'Poppins', sans-serif;"><em>Most Popular</em> Credit Card</h4>
                   </div>
                   <div class="owl-features owl-carousel">
                     <div class="item">
@@ -116,7 +116,7 @@
               <div class="col-lg-4">
                 <div class="top-downloaded">
                   <div class="heading-section">
-                    <h4><em>Top</em> Company</h4>
+                    <h4 style="font-family: 'Poppins', sans-serif;"><em>Top</em> Company</h4>
                   </div>
                   <ul>
                     <li>
@@ -144,10 +144,11 @@
               </div>
             </div>
             <!-- ***** Featured Games End ***** -->
+            
             <div class="gaming-library2">
               <div class="col-lg-12">
-                <div class="heading-section">
-                  <h4><em>TEAM MASTer</em> Member</h4>
+                <div class="heading-section" >
+                  <h4 style="font-family: 'Poppins', sans-serif;"><em>TEAM MASTer</em> Member</h4>
                 </div>
                 <div class="item">
                   <ul>
@@ -220,13 +221,6 @@
 
 
 
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+   
   
-    <script src="assets/js/isotope.min.js"></script>
-    <script src="assets/js/owl-carousel.js"></script>
-    <script src="assets/js/tabs.js"></script>
-    <script src="assets/js/popup.js"></script>
-    <script src="assets/js/custom.js"></script>
-  </body>
 </html>

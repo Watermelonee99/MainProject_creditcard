@@ -1,9 +1,36 @@
 <%-include('header.ejs')%>
-    <p>당신의 연체 위험도는 "<%= outputString %>" 입니다!</p>
-    
-    
-    <p>카드 추천 받으러 가기!</p>
-    <a class="btn btn-primary btn-lg" href="/transaction" role="button">카드 추천 받기 버튼</a>
+<div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="page-content">
+            <div class="main-banner">
+                <div class="row">
+                  <div class="col-lg-7">
+                    <div class="header-text">
+                      
+                        <h4><%=name%>님 <%= outputString %> &#127804; </h4>
+                        <h4>카드 추천 받으러 가기!</h4>
+                        <br>
+                        <div class="main-button">
+                          <a href="/transaction" role="button">카드 추천 받기🔗</a>
+                        </div>
+                      
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+        </div>
+      </div>
+    </div>
+</div>
+
+
+
     
     
 
