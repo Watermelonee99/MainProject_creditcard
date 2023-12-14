@@ -14,7 +14,29 @@
         <div class="page-content">
 
           
-          <% if(user_id){ %>  
+          <% if(user_id){ %> 
+            <div class="main-banner3">
+              <div class="row">
+                <div class="col-lg-7">
+                  <div class="header-text">
+                    <% if(user_id){ %>
+                      <h4><%=name%>님 환영합니다 &#127804; </h4>
+                      <h4>당신의 신용도를 책임지겠습니다</h4>
+                      <br>
+                      <div class="main-button">
+                        <a href="/grade" role="button">예측받기🔗</a>
+                      </div>
+                    <%} else{ %>
+                      <h4><em>환영합니다!</em> <hr/>당신의 신용도를 책임지겠습니다.<hr /></h4>
+                      <div class="main-button">
+                        <a href="/login">예측받기🔗</a>
+                      </div>
+                    <%} %>
+                    
+                  </div>
+                </div>
+              </div>
+            </div> 
             <!-- ***** Gaming Library Start ***** -->
             <div class="gaming-library1 profile-library">
               <form id="transactionForm" action="/transactionProc" method="post">

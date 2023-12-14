@@ -948,6 +948,60 @@ Banner Style
   font-style: normal;
   color: #ec6090;
 }
+.main-banner2 {
+  margin-top: 30px;
+  background-image: url(../images/gradeBanner-bg.png);
+  background-position: center center;
+  background-size: cover;
+  min-height: 380px;
+  border-radius: 23px;
+  padding: 80px 60px;
+}
+
+.main-banner2 h6 {
+  font-size: 20px;
+  color: #fff;
+  font-weight: 400;
+  margin-bottom: 25px;
+}
+
+.main-banner2 h4 {
+  font-size: 45px;
+  text-transform: uppercase;
+  margin-bottom: 25px;
+}
+
+.main-banner2 h4 em {
+  font-style: normal;
+  color: #ec6090;
+}
+.main-banner3 {
+  margin-top: 30px;
+  background-image: url(../images/transactionBanner-bg.png);
+  background-position: center center;
+  background-size: cover;
+  min-height: 380px;
+  border-radius: 23px;
+  padding: 80px 60px;
+}
+
+.main-banner3 h6 {
+  font-size: 20px;
+  color: #fff;
+  font-weight: 400;
+  margin-bottom: 25px;
+}
+
+.main-banner3 h4 {
+  font-size: 45px;
+  text-transform: uppercase;
+  margin-bottom: 25px;
+}
+
+.main-banner3 h4 em {
+  font-style: normal;
+  color: #ec6090;
+}
 
 /* 
 ---------------------------------------------
