@@ -2,13 +2,6 @@
 <%- include('header.ejs') %>
 
 <style>
-  body {
-    background: linear-gradient(to right, #c36ff3, #ffae66, #ffeb99);
-    margin: 0;
-    font-family: 'Roboto', 'Arial', sans-serif; /* Google Fonts에서 원하는 폰트로 변경하세요 */
-    color: #333;
-    text-align: center;
-  }
 
   h1 {
     color: #fff;
@@ -25,7 +18,7 @@
     justify-content: space-around;
   }
 
-  li {
+  li1 {
     background-color: #fff;
     border-radius: 16px;
     margin: 20px;
@@ -33,10 +26,12 @@
     transition: transform 0.3s ease-in-out;
     overflow: hidden;
     width: 250px;
+    height: 300px;
     text-align: center;
+    position: relative;
   }
 
-  li:hover {
+  li1:hover {
     transform: scale(1.05);
   }
 
@@ -58,9 +53,12 @@
     display: block;
     margin: 16px 0 8px;
     font-weight: bold;
-    font-size: 18px;
-    color: #333;
   }
+  strong.card {
+    font-size: 20px;
+    margin-bottom: 16px; /* 조절 가능한 공백 크기 */
+}
+
 
   p {
     color: #555;
@@ -69,26 +67,54 @@
   }
 </style>
 
-<!-- 여기서 result를 이용하여 원하는 정보를 출력 -->
-<h1>선택된 카드 정보</h1>
+  
 
-<ul>
-  <% if (result && result.length > 0) { %>
-    <% result.forEach(card => { %>
-      <li>
-        <div class="image-container">
-          <a href="<%= card.링크 %>">
-            <img src="<%= card.이미지 %>" alt="카드 이미지">
-          </a>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="page-content">
+        <div class="heading-section">
+          <h4 style = "color:#333; text-align: center;">&#127804;선택 카드&#127804; </h4>
+          
+          <div style="text-align: right;" class="main-button">
+            <a href="/recommend" >다시 선택하기</a>
+            <a href="/" >Home</a>
+          </div>
+          <br>
+          <hr>
+          <br>
         </div>
-        <strong>카드사:</strong> <%= card.카드사 %>
-        <strong>상품명:</strong> <%= card.상품명 %>
-        <p>부가 설명이 들어갈 수 있습니다.</p>
-      </li>
-    <% }) %>
-  <% } else { %>
-    <p>선택된 카드 정보가 없습니다.</p>
-  <% } %>
-</ul>
-
-<%- include('footer.ejs') %>
+        <ul>
+          <% if (result && result.length > 0) { %>
+            <% result.forEach(card => { %>
+              <li1>
+                <div class="image-container">
+                  <a href="<%= card.링크 %>">
+                    <img src="<%= card.이미지 %>" alt="카드 이미지">
+                  </a>
+                </div>
+                <strong style="font-size:20px;  "><%= card.상품명 %></strong> 
+                <strong style="position: absolute;
+                bottom: 8%;
+                width: 100%;"><%= card.카드사 %></strong> 
+                <p></p>
+                <!-- <p>부가 설명이 들어갈 수 있습니다.</p> -->
+              </li1>
+            <% }) %>
+          <% } else { %>
+            <p>선택된 카드 정보가 없습니다.</p>
+          <% } %>
+        </ul>
+        <br>
+        <hr>
+        <br>
+        <div style="text-align: center;" class="main-button">
+          <a href="/recommend" >다시 선택하기</a>
+          <a href="/" >Home</a>
+        </div>
+      <%- include('footer.ejs') %>
+      </div>
+    </div>
+  </div>
+</div>

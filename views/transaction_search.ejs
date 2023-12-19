@@ -2,13 +2,6 @@
 <%- include('header.ejs') %>
 
 <style>
-  body {
-    background: linear-gradient(to right, #c36ff3, #ffae66, #ffeb99);
-    margin: 0;
-    font-family: 'Roboto', 'Arial', sans-serif; /* Google Fonts에서 원하는 폰트로 변경하세요 */
-    color: #333;
-    text-align: center;
-  }
 
   h1 {
     color: #fff;
@@ -25,18 +18,20 @@
     justify-content: space-around;
   }
 
-  li {
+  li1 {
     background-color: #fff;
     border-radius: 16px;
-    margin: 10px;
+    margin: 20px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
     overflow: hidden;
     width: calc(20% - 20px); /* 20%의 폭과 여백 조절 */
+    height: 390px;
     text-align: center;
+    position: relative;
   }
 
-  li:hover {
+  li1:hover {
     transform: scale(1.05);
   }
 
@@ -63,33 +58,55 @@
   }
 
   strong.Rank {
-    font-size: 40px; /* 원하는 폰트 크기로 조정 */
+    font-size: 34px; /* 원하는 폰트 크기로 조정 */
   }
 
   
 </style>
 
-<!-- 여기서 result를 이용하여 원하는 정보를 출력 -->
-<h1>선택된 카드 정보</h1>
-
-<ul>
-  <% if (combinedInfoArray && combinedInfoArray.length > 0) { %>
-    <% combinedInfoArray.slice(0, 10).forEach(card => { %>
-      <li>
-        <div class="image-container">
-          <a href="<%= card.link %>">
-            <img src="<%= card.img %>" alt="카드 이미지">
-          </a>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="page-content">
+        <div class="heading-section">
+          <h4 style = "color:#333; text-align: center;"><em><%=name%>님</em>에게 적합한 카드입니다</h4>
+          <hr>
+          <br>
         </div>
-        <strong class="Rank"> <%= card.Rank %>위</strong>
-        <strong><%= card.Company %></strong>
-        <strong><%= card.CreditCard %></strong>
-        <strong>할인 받을 수 있는 금액 : <%= card.Score %> 원</strong>
-      </li>
-    <% }) %>
-  <% } else { %>
-    <p>선택된 카드 정보가 없습니다.</p>
-  <% } %>
-</ul>
+          <ul>
+            <% if (combinedInfoArray && combinedInfoArray.length > 0) { %>
+              <% combinedInfoArray.slice(0, 8).forEach(card => { %>
+                <li1>
+                  <div class="image-container">
+                    <a href="<%= card.link %>">
+                      <img src="<%= card.img %>" alt="카드 이미지">
+                    </a>
+                  </div>
+                  <strong class="Rank"> <%= card.Rank %>위</strong>
+                  <strong style="font-size: 20px; "><%= card.CreditCard %></strong>
+                  <strong style="font-size: 15px;"><%= card.Company %></strong>
+                  <strong style="position: absolute;
+                  bottom: 0;
+                  width: 100%; ">월 할인 금액 : <%= card.Score %> 원</strong>
+                </li1>
+              <% }) %>
+            <% } else { %>
+              <p>선택된 카드 정보가 없습니다.</p>
+            <% } %>
+          </ul>
+          <br>
+          <hr>
+          <br>
+          <div style="text-align: center;" class="main-button">
+            <a href="/transaction" >다시 입력하기</a>
+            <a href="/" >Home</a>
+          </div>
+          <br>
+          <br>
+          
+      <%- include('footer.ejs') %>
+      </div>
+    </div>
+  </div>
+</div>
 
-<%- include('footer.ejs') %>

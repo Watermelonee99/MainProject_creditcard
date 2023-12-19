@@ -54,7 +54,7 @@ card = card.drop([0,3,18,20,24,26,28,29], axis=1)
 # print(card_data)
 
 user = df_transaction.drop([0,1], axis=1)
-user = np.where(user * 0.05 >= 10000, 10000, user * 0.05)
+user = np.where(user * 0.05 >= 5000, 5000, user * 0.05)
 user = np.array(user[:, :-1]).flatten()  # 'total' 제외
 
 class CreditCardRecommendation:
@@ -82,7 +82,7 @@ class CreditCardRecommendation:
         recommended_cards = [{
             'Rank': rank,
             'CreditCard': self.card_data.iloc[index - 1][1],
-            'Score': score
+            'Score': '{:,.0f}'.format(score)
         } for rank, (index, score) in enumerate(self.card_indices_and_ranks, 1)]
 
         return recommended_cards[:num_recommendations], self.card_indices_and_ranks

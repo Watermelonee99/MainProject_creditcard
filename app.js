@@ -138,11 +138,17 @@ app.get('/gradelogin', function(req, res){
     res.render('gradelogin.ejs')
 });
 
-app.get('/loading', function(req, res){
-    res.render('loading.ejs')
+app.get('/grade_loading', function(req, res){
+    res.render('grade_loading.ejs')
 });
+
+
 app.get('/grade_result', function(req, res){
     res.render('grade_result.ejs')
+});
+
+app.get('/trans_loading', function(req, res){
+    res.render('trans_loading.ejs')
 });
 
 
@@ -234,6 +240,7 @@ app.post('/transaction_searchProc', async (req, res) => {
                         } else {
                             // Create a new object with the desired structure
                             const combinedInfo = {
+                                Rank: category.Rank,
                                 CreditCard: category.CreditCard,
                                 Score: category.Score,
                                 Company: result[0].카드사,
@@ -359,7 +366,7 @@ app.post('/recommendProc', (req, res) => {
         const categoriesArray = selectedCategories.split(',');
 
         // Escape and sanitize the selectedCategories to prevent SQL injection
-        const conditions = categoriesArray.map(category => `\`${category}\` = 1`).join(' OR ');
+        const conditions = categoriesArray.map(category => `\`${category}\` = 1`).join(' AND ');
         const sql = `SELECT * FROM card_info WHERE ${conditions}`;
 
         connection.query(sql, function (err, result) {
@@ -455,17 +462,15 @@ app.get('/logout', (req, res) => {
 
 app.post('/registerProc', (req, res) => {
     const name = req.body.name;
-    const user_id = req.body.user_id;
     const email = req.body.email;
     const pw = req.body.pw;
-    const age = req.body.age;
 
     var sql = `select * from user where email=?`
     
-    var sql2 = `insert into user(name,user_id, email, pw,age)values(?,?,?,?,?)`
+    var sql2 = `insert into user(name, email, pw)values(?,?,?)`
     
     var values1 = [email]
-    var values = [name,user_id,email,pw,age];
+    var values = [name,email,pw];
 
     connection.query(sql, values1, function(err, result){
         if(err) throw err;
@@ -522,7 +527,7 @@ app.post('/transactionProc', (req, res) => {
     connection.query(sql, function(err, result){
         if(err) throw err;
         console.log('자료 1개를 삽입하였습니다.');
-        res.send("<script> alert('정보가 등록되었습니다.'); location.href='/transaction'</script>");
+        res.send("<script> alert('정보가 등록되었습니다.'); location.href='/transaction_mydata'</script>");
     })
 
 
@@ -576,7 +581,7 @@ app.post('/gradeProc', (req, res) => {
           res.send("<script> alert('잘못된 정보이거나 빈칸이 있습니다.'); window.history.go(-1); </script>");
         } else {
           console.log('자료 1개를 삽입하였습니다.');
-          res.send("<script>  location.href='/loading'; </script>");
+          res.send("<script>  location.href='/grade_loading'; </script>");
         }
       });  
     
